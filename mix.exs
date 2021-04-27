@@ -20,7 +20,7 @@ defmodule BlogNew.MixProject do
   def application do
     [
       mod: {BlogNew.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :timex, :yamerl]
     ]
   end
 
@@ -44,7 +44,10 @@ defmodule BlogNew.MixProject do
       {:telemetry_poller, "~> 0.4"},
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
-      {:plug_cowboy, "~> 2.0"}
+      {:plug_cowboy, "~> 2.0"},
+      {:earmark, "~> 1.4.15"},
+      {:timex, "~> 2.1.6"},
+      {:yamerl,"~> 0.8.1"}
     ]
   end
 
