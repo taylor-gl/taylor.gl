@@ -13,6 +13,8 @@ defmodule BlogNew.Application do
       BlogNewWeb.Telemetry,
       # Start the PubSub system
       {Phoenix.PubSub, name: BlogNew.PubSub},
+      # Crawl the filesystem for new blog posts
+      {Task, &BlogNew.Blog.Post.crawl/0},
       # Start the Endpoint (http/https)
       BlogNewWeb.Endpoint
       # Start a worker by calling: BlogNew.Worker.start_link(arg)

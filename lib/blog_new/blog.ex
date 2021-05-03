@@ -5,11 +5,11 @@ defmodule BlogNew.Blog do
 
   import Ecto.Query, warn: false
   alias BlogNew.Repo
-
   alias BlogNew.Blog.Post
 
   @doc """
-  Returns the list of posts.
+  Returns the list of posts. Does not return draft posts unless the current
+  environment is the development environment (:dev).
 
   ## Examples
 
@@ -18,11 +18,19 @@ defmodule BlogNew.Blog do
 
   """
   def list_posts do
-    Repo.all(Post)
+    if Application.get_env(:blog_new, :env) == :dev do
+      Repo.all(Post)
+    else
+      query = from p in Post,
+              where: p.draft == false
+      Repo.all(query)
+    end
   end
 
   @doc """
   Gets a single post, using the post id number to calculate the filename.
+  Does not return draft posts unless the current environment is the development
+  environment (:dev).
 
   Raises `Ecto.NoResultsError` if the Post does not exist.
 
@@ -37,71 +45,10 @@ defmodule BlogNew.Blog do
   """
   def get_post!(id) do
     filename = Post.post_filename(id)
-    Repo.get_by!(Post, markdown_filename: filename)
-  end
-
-  @doc """
-  Creates a post.
-
-  ## Examples
-
-      iex> create_post(%{field: value})
-      {:ok, %Post{}}
-
-      iex> create_post(%{field: bad_value})
-      {:error, %Ecto.Changeset{}}
-
-  """
-  def create_post(attrs \\ %{}) do
-    %Post{}
-    |> Post.changeset(attrs)
-    |> Repo.insert()
-  end
-
-  @doc """
-  Updates a post.
-
-  ## Examples
-
-      iex> update_post(post, %{field: new_value})
-      {:ok, %Post{}}
-
-      iex> update_post(post, %{field: bad_value})
-      {:error, %Ecto.Changeset{}}
-
-  """
-  def update_post(%Post{} = post, attrs) do
-    post
-    |> Post.changeset(attrs)
-    |> Repo.update()
-  end
-
-  @doc """
-  Deletes a post.
-
-  ## Examples
-
-      iex> delete_post(post)
-      {:ok, %Post{}}
-
-      iex> delete_post(post)
-      {:error, %Ecto.Changeset{}}
-
-  """
-  def delete_post(%Post{} = post) do
-    Repo.delete(post)
-  end
-
-  @doc """
-  Returns an `%Ecto.Changeset{}` for tracking post changes.
-
-  ## Examples
-
-      iex> change_post(post)
-      %Ecto.Changeset{data: %Post{}}
-
-  """
-  def change_post(%Post{} = post, attrs \\ %{}) do
-    Post.changeset(post, attrs)
+    if Application.get_env(:blog_new, :env) == :dev do
+      Repo.get_by!(Post, markdown_filename: filename)
+    else
+      Repo.get_by!(Post, markdown_filename: filename, draft: false)
+    end
   end
 end

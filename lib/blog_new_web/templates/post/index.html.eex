@@ -3,6 +3,9 @@
 <ul>
   <%= for post <- @posts do %>
     <li>
+      <%= if post.draft do %>
+        <strong>DRAFT</strong>
+      <% end %>
       <%= link post.title, to: Routes.post_path(@conn, :show, Post.post_id(post.markdown_filename)) %>
     </li>
   <% end %>
