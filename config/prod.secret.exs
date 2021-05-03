@@ -26,7 +26,7 @@ secret_key_base =
 config :blog_new, BlogNewWeb.Endpoint,
   http: [
     port: String.to_integer(System.get_env("PORT") || "4000"),
-    transport_options: [socket_opts: [:inet6]]
+    transport_options: [socket_opts: [String.to_atom(System.get_env("PROTOCOL"))]]
   ],
   secret_key_base: secret_key_base
 
