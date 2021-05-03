@@ -16,8 +16,8 @@ defmodule BlogNewWeb.Router do
   scope "/", BlogNewWeb do
     pipe_through :browser
 
-    get "/", PageController, :index
-    resources "/posts", PostController
+    get "/blog", PostController, :index
+    get "/blog/:id", PostController, :show
   end
 
   # Other scopes may use custom stacks.

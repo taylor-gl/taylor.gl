@@ -22,7 +22,7 @@ defmodule BlogNew.Blog do
   end
 
   @doc """
-  Gets a single post.
+  Gets a single post, using the post id number to calculate the filename.
 
   Raises `Ecto.NoResultsError` if the Post does not exist.
 
@@ -35,7 +35,10 @@ defmodule BlogNew.Blog do
       ** (Ecto.NoResultsError)
 
   """
-  def get_post!(id), do: Repo.get!(Post, id)
+  def get_post!(id) do
+    filename = Post.post_filename(id)
+    Repo.get_by!(Post, markdown_filename: filename)
+  end
 
   @doc """
   Creates a post.

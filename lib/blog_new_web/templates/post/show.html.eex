@@ -1,20 +1,9 @@
-<h1>Show Post</h1>
+<nav>
+  <span><%= link "Back", to: Routes.post_path(@conn, :index) %></span>
+</nav>
 
-<ul>
-
-  <li>
-    <strong>Title:</strong>
-    <%= @post.title %>
-  </li>
-
-  <li>
-    <strong>Markdown filename:</strong>
-    <%= @post.markdown_filename %>
-  </li>
-
-</ul>
-
-<span><%= link "Edit", to: Routes.post_path(@conn, :edit, @post) %></span>
-<span><%= link "Back", to: Routes.post_path(@conn, :index) %></span>
-
-<h2>Content</h2>
+<article>
+  <h1><%= @post.title %></h1>
+  <strong><%= @post.publish_date %></strong>
+  <%= raw(@post.content) %>
+</article>

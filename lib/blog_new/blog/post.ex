@@ -2,7 +2,6 @@ defmodule BlogNew.Blog.Post do
   use Ecto.Schema
   import Ecto.Changeset
   alias BlogNew.Repo
-  alias BlogNew.Blog
   alias BlogNew.Blog.Post
 
   schema "posts" do
@@ -13,40 +12,85 @@ defmodule BlogNew.Blog.Post do
     field :draft, :boolean
     field :publish_date, :date
 
-    field :post_id
-
     timestamps()
   end
 
   @doc false
   def changeset(post, attrs) do
     post
-    |> cast(attrs, [:title, :markdown_filename])
-    |> validate_required([:post_id, :markdown_filename])
+    |> cast(attrs, [:title, :markdown_filename, :content, :draft, :publish_date])
+    |> validate_required([:title, :markdown_filename, :content, :draft, :publish_date])
+    |> unique_constraint(:markdown_filename)
   end
 
+  @doc """
+  Calculates an integer post id from the given markdown filename.
+
+  ## Examples
+
+      iex> BlogNew.Blog.Post.post_id("13.md")
+      13
+
+  """
+  def post_id(filename) do
+    filename
+    |> String.replace_suffix(".md", "")
+    |> String.to_integer
+  end
+
+  @doc """
+  Calculates markdown filename from given integer post id
+
+  ## Examples
+
+      iex> BlogNew.Blog.Post.post_filename(10)
+      "10.md"
+
+  """
+  def post_filename(id) do
+    if id |> is_integer do
+      id |> Integer.to_string |> (&(&1 <> ".md")).()
+    else
+      id |> (&(&1 <> ".md")).()
+    end
+  end
+
+  @doc """
+  Crawls the filesystem posts directory, adding all posts to the database. Existing posts are updated.
+  """
   def crawl do
-    # Crawl for new blog posts
-    # TODO: Only choose draft posts in development mode
+    num_processed = File.ls!("priv/content/posts")
+    |> Enum.map(&Post.post_from_file/1)
+    |> Enum.sort(&Post.sort_posts/2)
+    |> Enum.map(&Post.changeset(&1, %{}))
+    |> Enum.map(&Repo.insert_or_update/1)
+    |> Enum.count
+
+    IO.puts("#{num_processed} blog posts processed.")
   end
 
-  def post_from_file(filename) do
-    post_id = filename |> String.replace_suffix(".md", "")
+  @doc """
+  Sorts two posts based on their publish date.
+  """
+  def sort_posts(%Post{publish_date: d1}, %Post{publish_date: d2}) do
+    Date.compare(d1, d2) == :gt
+  end
 
-    new_post = %Blog.Post{
-          content: nil,
-          draft: nil,
-          post_id: post_id,
-          markdown_filename: filename,
-          publish_date: nil,
-          title: nil,
-    }
-    |> Repo.insert!()
+  @doc """
+  Creates a post struct from a markdown file for the post.
+  """
+  def post_from_file(filename) do
+    # creates a struct from markdown file. Can be turned into a changeset and inserted into repo later.
+    IO.puts("Processing blog post from file... #{filename}")
+    post = case Repo.get_by(Post, markdown_filename: filename) do
+      nil -> %Post{markdown_filename: filename}
+      existing -> existing
+    end
 
     Path.join(["priv/content/posts", filename])
     |> File.read!
     |> split
-    |> extract(new_post)
+    |> extract(post)
   end
 
   defp split(markdown_data) do
@@ -73,7 +117,7 @@ defmodule BlogNew.Blog.Post do
     IO.inspect(get_prop(props, "publish_date"))
     %{post |
       title: get_prop(props, "title"),
-      publish_date: Timex.parse!(get_prop(props, "publish_date"), "{ISOdate}"),
+      publish_date: Date.from_iso8601!(get_prop(props, "publish_date")),
       draft: string_to_boolean(get_prop(props, "draft")),
       content: content}
   end

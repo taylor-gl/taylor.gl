@@ -2,9 +2,11 @@ defmodule BlogNew.BlogTest do
   use BlogNew.DataCase
 
   alias BlogNew.Blog
+  alias BlogNew.Blog.Post
+
+  doctest Post
 
   describe "posts" do
-    alias BlogNew.Blog.Post
 
     @valid_attrs %{markdown_filename: "some markdown_filename", title: "some title"}
     @update_attrs %{markdown_filename: "some updated markdown_filename", title: "some updated title"}
