@@ -59,16 +59,16 @@ defmodule BlogNew.Blog.Post do
   Crawls the filesystem posts directory, adding all posts to the database. Existing posts are updated.
   """
   def crawl do
-    posts = File.ls!("priv/content/posts")
+    posts_and_changes = File.ls!("priv/content/posts")
     |> Enum.map(&Post.post_from_file/1)
     |> Enum.filter(&(&1))
 
-    posts
-    |> Enum.sort(&Post.sort_posts/2)
-    |> Enum.map(&Post.changeset(&1, %{}))
+
+    posts_and_changes
+    |> Enum.map(fn {post, changes} -> Post.changeset(post, changes) end)
     |> Enum.map(fn changeset -> Repo.insert_or_update!(changeset, force: true) end) # force true to update timestamp even if post hasn't changed
 
-    num_processed = Enum.count(posts)
+    num_processed = Enum.count(posts_and_changes)
     IO.puts("#{num_processed} blog posts processed.")
   end
 
@@ -80,10 +80,12 @@ defmodule BlogNew.Blog.Post do
   end
 
   @doc """
-  Creates a post struct from a markdown file for the post.
+  Creates a post struct from a markdown file for the post, or finds it in the database.
+
+  Returns a the post struct and the list of changes that have been made to the post since it
+  was updated in the database.
   """
   def post_from_file(filename) do
-    # creates a struct from markdown file. Can be turned into a changeset and inserted into repo later.
     full_filename = Path.join(["priv/content/posts", filename])
     modified_date = full_filename
     |> File.stat!
@@ -97,13 +99,15 @@ defmodule BlogNew.Blog.Post do
     end
     if post do
       IO.puts("Processing blog post from file... #{filename}")
-      IO.puts("updated: #{post.updated_at}, modified: #{modified_date}, comparison: #{NaiveDateTime.compare(post.updated_at, modified_date)}")
-      full_filename
+      # IO.puts("updated: #{post.updated_at}, modified: #{modified_date}, comparison: #{NaiveDateTime.compare(post.updated_at, modified_date)}")
+      changes = full_filename
       |> File.read!
       |> split
-      |> extract(post)
+      |> extract
+
+      {post, changes}
     else
-      post # nil
+      nil # nil
     end
   end
 
@@ -126,10 +130,9 @@ defmodule BlogNew.Blog.Post do
     parsed
   end
 
-  defp extract({props, content}, post) do
+  defp extract({props, content}) do
     # extract properties from the YAML and put them into the post
-    %{post |
-      title: get_prop(props, "title"),
+    %{title: get_prop(props, "title"),
       publish_date: Date.from_iso8601!(get_prop(props, "publish_date")),
       draft: string_to_boolean(get_prop(props, "draft")),
       content: content}

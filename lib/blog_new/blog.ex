@@ -8,8 +8,8 @@ defmodule BlogNew.Blog do
   alias BlogNew.Blog.Post
 
   @doc """
-  Returns the list of posts. Does not return draft posts unless the current
-  environment is the development environment (:dev).
+  Returns the list of posts, sorted by publish date.
+  Does not return draft posts unless the current environment is the development environment (:dev).
 
   ## Examples
 
@@ -19,11 +19,15 @@ defmodule BlogNew.Blog do
   """
   def list_posts do
     if Application.get_env(:blog_new, :env) == :dev do
+      # crawl for new posts, and show drafts
+      BlogNew.Blog.Post.crawl()
       Repo.all(Post)
+      |> Enum.sort(&Post.sort_posts/2)
     else
       query = from p in Post,
               where: p.draft == false
       Repo.all(query)
+      |> Enum.sort(&Post.sort_posts/2)
     end
   end
 
@@ -46,6 +50,8 @@ defmodule BlogNew.Blog do
   def get_post!(id) do
     filename = Post.post_filename(id)
     if Application.get_env(:blog_new, :env) == :dev do
+      # crawl for new posts, and show drafts
+      BlogNew.Blog.Post.crawl()
       Repo.get_by!(Post, markdown_filename: filename)
     else
       Repo.get_by!(Post, markdown_filename: filename, draft: false)
