@@ -2,6 +2,98 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Global */
+:root {
+  /* there may be a better way to do this */
+  --text: #3f3f46; /* text color */
+  --link: #0891B2; /* link underline color, tailwind cyan 600 */
+  --visited: #7C3AED; /* link (visited) underline color, tailwind violet-600 */
+  --footnote: #65A30D; /* footnote underline color, tailwind lime-600 */
+}
+body {
+  @apply bg-gray-50;
+  hyphens: auto;
+}
+::selection { background: var(--footnote); }
+
+.text { @apply font-serif text-lg leading-relaxed text-justify text-gray-700 py-1; }
+
+/* links with fancy colored underline */
+.link {
+  @apply font-serif text-lg leading-relaxed text-justify text-gray-800 underline;
+  text-decoration-color: var(--link);
+  text-decoration-thickness: 2px;
+}
+.link:visited { text-decoration-color: var(--visited) }
+.link:hover { text-decoration-color: var(--text) }
+.link:active { text-decoration-color: var(--text) }
+
+.footnote-text {
+  @apply font-serif text-lg leading-relaxed text-justify text-gray-800 underline relative inline-block;
+  text-decoration-color: var(--footnote);
+  text-decoration-thickness: 3px;
+  text-decoration-style: dotted;
+}
+.footnote-text:hover { text-decoration-color: var(--text) }
+.footnote-text:active { text-decoration-color: var(--text) }
+
+.green-stripe-bg {
+  background-color: #65a30d;
+  background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.11' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+.cyan-stripe-bg {
+  background-color: #0891b2;
+  background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.13' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* Component classes for markdown-generated HTML */
+.markdown-p { @apply text; }
+
+.markdown-em { }
+
+.markdown-strong { }
+
+// .markdown-h1 { @apply font-sans text-5xl font-normal tracking-wider leading-relaxed text-center text-gray-900 uppercase pb-2; }
+.markdown-h1 {
+  @apply font-sans text-4xl font-bold tracking-wider leading-relaxed text-center uppercase pb-2;
+  // background-color: #65a30d;
+  // background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.11' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
+  // background-clip: text;
+  // color: transparent;
+  // --webkit-background-clip: text;
+}
+.markdown-h2 { @apply font-sans text-2xl font-medium leading-relaxed text-left text-gray-900 pt-4 pb-1; }
+.markdown-h3 { @apply font-sans text-xl leading-relaxed text-left text-gray-900 pt-3; }
+.markdown-h4 { @apply font-sans text-xl leading-relaxed text-left text-gray-900 pt-3; }
+.markdown-h5 { @apply font-sans text-lg leading-relaxed text-left text-gray-900 pt-1; }
+.markdown-h6 { @apply font-sans text-lg leading-relaxed text-left text-gray-900 pt-1; }
+
+.markdown-blockquote { }
+
+.markdown-ul { }
+.markdown-ol { }
+.markdown-li { }
+
+.markdown-hr { }
+
+.markdown-a { @apply link; }
+
+.markdown-img { }
+.markdown-figure { }
+.markdown-figcaption { }
+
+// .markdown-small { }
+// .markdown-sub { }
+// .markdown-sup { }
+
+// .markdown-ins { }
+// .markdown-del { }
+
+// .markdown-pre { }
+// .markdown-code { }
+// .markdown-kbd { }
+
 /* Alerts and form errors */
 .alert {
   padding: 15px;

@@ -1,0 +1,8 @@
+<span class="group footnote-text"><%=@text%>
+  <span class="invisible group-hover:visible absolute z-10 bottom-full left-1/2 transform -translate-x-2/4 flex items-center min-w-max p-2 green-stripe-bg rounded-lg shadow-xl">
+    <span class="w-12 h-12 rounded-full border-4 border-gray-200 flex justify-center items-center"><span class="inline font-serif text-4xl  text-gray-200 font-bold">i</span></span>
+    <span class="font-serif text-lg leading-relaxed text-justify text-white flex-auto max-w-prose p-2">
+      <%=@hover%>
+    </span>
+  </span>
+</span>

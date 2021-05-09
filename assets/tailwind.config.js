@@ -8,9 +8,15 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {},
+    fontFamily: {
+      sans: ["Montserrat", "sans-serif"],
+      serif: ["Alegreya", "serif"],
+    },
   },
   variants: {
-    extend: {},
+    extend: {
+      visibility: ['hover', 'focus', 'group-hover', 'group-focus'],
+    },
   },
   plugins: [],
 }

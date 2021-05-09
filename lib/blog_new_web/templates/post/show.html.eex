@@ -1,9 +1,14 @@
-<nav>
-  <span><%= link "Back", to: Routes.post_path(@conn, :index) %></span>
+<nav class="pb-2">
+  <span class="link"><%= link "Home", to: Routes.post_path(@conn, :index) %></span>
+  <span class="text"> » </span>
+  <span class="link"><%= link "Blog", to: Routes.post_path(@conn, :index) %></span>
 </nav>
 
 <article>
-  <h1><%= @post.title %></h1>
-  <strong><%= @post.publish_date %></strong>
-  <%= raw(@post.content) %>
+  <h1 class="markdown-h1"><%= @post.title %></h1>
+  <!-- evaluate EEx tags in content and then render the content -->
+  <%= raw(EEx.eval_string(@post.content)) %>
+  <div class="font-sans font-light text-center text-gray-500">
+    <strong>Published <%= @publish_date %></strong>
+  </div>
 </article>
