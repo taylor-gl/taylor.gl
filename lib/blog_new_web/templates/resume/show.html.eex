@@ -1,0 +1,119 @@
+<div class="cyan-stripe-bg overflow-auto print:invisible"> <!-- background color -->
+  <style type="text/css">
+   /* remove page margins when printing */
+   @page { margin: 0mm; }
+  </style>
+
+  <!-- letter size resume block -->
+  <div class="flex flex-col letter-paper mx-auto my-16 px-8 py-4 bg-gray-50 shadow-2xl print:visible print:shadow-none print:bg-white print:absolute print:left-0 print:top-0 print:m-0">
+    <header class="flex flex-row">
+      <div class="flex flex-col w-8/12">
+        <h1 class="font-sans text-5xl font-bold tracking-wider leading-tight flex-none"><strong>Taylor G. Lunt</strong></h1>
+        <div class="grid grid-cols-2 gap-1 m-2 font-serif text-base leading-relaxed text-gray-700">
+          <div class="flex">
+            <div><i class="fab fa-canadian-maple-leaf fa-lg" data-fa-transform="left-2"></i></div>
+            Kitchener, Ontario, Canada
+          </div>
+          <div class="flex">
+            <div class="pr-1"><i class="fas fa-envelope"></i></div>
+            <a href="mailto:hireme@taylor.gl" class="link print:no-underline">
+              hireme@taylor.gl
+            </a>
+          </div>
+          <div class="flex">
+            <div class="pr-1"><i class="fas fa-globe-americas"></i></div>
+            <a href="https://taylor.gl/" class="link print:no-underline">
+              taylor.gl
+            </a>
+          </div>
+          <div class="flex">
+            <div class="pr-1"><i class="fab fa-github"></i></div>
+            <a href="https://github.com/taylor-gl" class="link print:no-underline">
+              github.com/taylor-gl
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="w-1/12"></div>
+      <form class="contents" method="GET" action="<%= Routes.static_path(@conn, "/pdf/Taylor_G_Lunt_Resume.pdf") %>">
+        <button class="group text-center font-serif text-xl leading-relaxed text-green-600 bg-white border border-green-600 ring-green-600 ring-offset-1 rounded-xl justify-self-end flex justify-center mt-3 mx-2 w-3/12 h-2/4 shadow transition duration-200 ease-in-out hover:bg-green-600 hover:text-white hover:shadow-xl transform hover:-translate-y-2 hover:scale-105 select-none focus:outline-none focus:shadow-outline focus:ring-2 print:invisible">
+          <div class="pr-2 self-center">
+            <i class="fas fa-file-pdf fa-lg"></i>
+          </div>
+          <p class="self-center">PDF download</p>
+        </button>
+      </form>
+    </header>
+    <hr class="border-1 border-gray-900" />
+    <section>
+      <p class="font-serif text-base leading-relaxed text-gray-700 pt-2">I am a recent University of Toronto graduate looking for work as a junior developer. I enjoy solving problems and writing useful, clean code. This will be my first software development job, and I'm excited.</p>
+    </section>
+    <div class="flex flex-row"> <!-- two columns -->
+      <div class="flex-none w-8/12"> <!-- column 1 -->
+        <section>
+          <div class="group relative my-4 mx-2 p-2 border border-gray-500 rounded-xl font-serif text-base leading-relaxed text-gray-700 bg-white shadow transition duration-200 ease-in-out hover:bg-gray-50 hover:shadow-xl transform hover:-translate-y-2 hover:scale-105 print:shadow-none">
+            <i class="absolute z-0 fas fa-graduation-cap fa-fw fa-6x right-1 text-gray-200 transition duration-300 ease-in-out group-hover:text-green-400"></i>
+            <h2 class="relative z-10 font-sans text-lg leading-tight text-left text-gray-900"><strong>University of Toronto</strong></h2>
+            <p class="relative z-10 text-gray-500"><em>Graduated <strong>June 2021</strong>.</em></p>
+            <p class="relative z-10">Bachelor of Science — Dual major in Computer Science and Psychology.
+              My GPA was <strong class="font-sans">3.18</strong>.</p>
+            <ul class="relative z-10">
+              <li class="flex pt-1 pb-1"><div class="pr-1"><i class="fas fa-check text-gray-400 transition duration-300 ease-in-out group-hover:text-green-500"></i></div>I participated in several group software development projects, including developing one real web application for a non-profit organization using Agile/Scrum methodologies.</li>
+              <li class="flex pb-1"><div class="pr-1"><i class="fas fa-check text-gray-400 transition duration-300 ease-in-out group-hover:text-green-500"></i></div>I implemented an extent-based file system in C.</li>
+              <li class="flex"><div class="pr-1"><i class="fas fa-check text-gray-400 transition duration-300 ease-in-out group-hover:text-green-500"></i></div>I made a clone of the game Mastermind using logic gates.</li>
+            </ul>
+          </div>
+        </section>
+        <section>
+          <p class="font-serif text-base leading-relaxed text-gray-700">I just graduated, so I have no professional software development experience yet. Here are some other jobs I've worked:</p>
+          <div class="group relative my-4 mx-2 p-2 border border-gray-500 rounded-xl font-serif text-base leading-relaxed text-gray-700 bg-white shadow transition duration-200 ease-in-out hover:bg-gray-50 hover:shadow-xl transform hover:-translate-y-2 hover:scale-105">
+            <i class="absolute z-0 fas fa-hamburger fa-fw fa-6x right-1 text-gray-200 transition duration-300 ease-in-out group-hover:text-green-400"></i>
+            <h2 class="relative z-10 font-sans text-lg leading-tight text-left text-gray-900 print:shadow-none"><strong>A&W</strong></h2>
+            <p class="relative z-10 text-gray-500"><em>Vaughan, Ontario from <strong>May 2019 ⟼ January 2020</strong></em></p>
+            <p class="relative z-10">Fast Food Worker</p>
+            <p class="relative z-10">I worked under pressure in the kitchen and at the cashier in one of the busiest locations in the country (right outside of Canada's Wonderland).</p>
+          </div>
+          <div class="group relative my-4 mx-2 p-2 border border-gray-500 rounded-xl font-serif text-base leading-relaxed text-gray-700 bg-white shadow transition duration-200 ease-in-out hover:bg-gray-50 hover:shadow-xl transform hover:-translate-y-2 hover:scale-105">
+            <i class="absolute z-0 fas fa-school fa-fw fa-6x right-1 text-gray-200 transition duration-300 ease-in-out group-hover:text-green-400"></i>
+            <p class="relative z-10 font-sans text-lg leading-tight text-left text-gray-900 print:shadow-none"><strong>Red Deer Regional Catholic Schools</strong></p>
+            <h2 class="relative z-10 text-gray-500"><em>Red Deer, Alberta, during <strong>Summer 2015</strong></em></h2>
+            <p class="relative z-10">IT Department</p>
+            <p class="relative z-10">A summer job where I went with a team from school to school, servicing the school's computers.</p>
+          </div>
+          <div class="group relative mt-3 mb-4 mx-2 p-2 border border-gray-500 rounded-xl font-serif text-base leading-relaxed text-gray-700 bg-white shadow transition duration-200 ease-in-out hover:bg-gray-50 hover:shadow-xl transform hover:-translate-y-2 hover:scale-105">
+            <i class="absolute z-0 fas fa-hospital fa-fw fa-6x right-1 text-gray-200 transition duration-300 ease-in-out group-hover:text-green-400"></i>
+            <h2 class="relative z-10 font-sans text-lg leading-tight text-left text-gray-900 print:shadow-none"><strong>Red Deer Regional Hospital Centre</strong></h2>
+            <p class="relative z-10 text-gray-500"><em>Red Deer, Alberta, from <strong>September 2010 ⟼ April 2014</strong></em></p>
+            <p class="relative z-10">Renal Dialysis and Emergency Room Volunteer</p>
+            <p class="relative z-10">In teams, we were in charge of tasks like assisting the patients and nurses, organizing, cleaning, and bringing meals to patients.</p>
+          </div>
+      </div>
+      <div class="flex-grow w-4/12"> <!-- column 2 -->
+        <section>
+          <div class="group my-4 mx-2 p-2 border border-gray-500 rounded-xl font-serif font-bold text-base leading-relaxed text-gray-600 bg-white shadow transition duration-200 ease-in-out hover:bg-gray-50 hover:shadow-xl transform hover:-translate-y-2 hover:scale-105" style="hyphens:none;">
+            <h2 class="relative z-10 font-sans text-lg leading-tight text-left text-gray-900 print:shadow-none"><strong>Software Skills</strong></h2>
+            <ul>
+              <li class="flex py-2"><div class="pr-2"><i class="far fa-check-circle fa-lg text-gray-400 transition duration-300 ease-in-out group-hover:text-green-500"></i></div><p>Elixir/Phoenix (<a href="https://taylor.gl" class="link print:no-underline">e.g.&nbsp;my&nbsp;website</a>)</p></li>
+              <li class="flex pb-2"><div class="pr-2"><i class="far fa-check-circle fa-lg text-gray-400 transition duration-300 ease-in-out group-hover:text-green-500"></i></div>Python</li>
+              <li class="flex pb-2"><div class="pr-2"><i class="far fa-check-circle fa-lg text-gray-400 transition duration-300 ease-in-out group-hover:text-green-500"></i></div>C</li>
+              <li class="flex pb-2"><div class="pr-2"><i class="far fa-check-circle fa-lg text-gray-400 transition duration-300 ease-in-out group-hover:text-green-500"></i></div>Databases/SQL</li>
+              <li class="flex pb-2"><div class="pr-2"><i class="far fa-check-circle fa-lg text-gray-400 transition duration-300 ease-in-out group-hover:text-green-500"></i></div>HTML/CSS/Javascript, including tailwindcss</li>
+              <li class="flex pb-2"><div class="pr-2"><i class="far fa-check-circle fa-lg text-gray-400 transition duration-300 ease-in-out group-hover:text-green-500"></i></div>Unix/bash/shell</li>
+              <li class="flex pb-2"><div class="pr-2"><i class="far fa-check-circle fa-lg text-gray-400 transition duration-300 ease-in-out group-hover:text-green-500"></i></div>Git/version control</li>
+              <li class="flex"><div class="pr-2"><i class="far fa-check-circle fa-lg text-gray-400 transition duration-300 ease-in-out group-hover:text-green-500"></i></div>Unit testing and test-driven development</li>
+            </ul>
+          </div>
+        </section>
+        <section>
+          <div class="group my-4 mx-2 p-2 border border-gray-500 rounded-xl font-serif text-base leading-relaxed text-gray-700 bg-white shadow transition duration-200 ease-in-out hover:bg-gray-50 hover:shadow-xl transform hover:-translate-y-2 hover:scale-105" style="hyphens:none;">
+            <h2 class="relative z-10 font-sans text-lg leading-tight text-left text-gray-900 print:shadow-none"><strong>Soft Skills</strong></h2>
+            <ul>
+              <li class="py-2"><strong>Self-awareness</strong> — I'm easy to work with and I'm a team player.</li>
+              <li class="pb-2"><strong>Fast learning</strong> — I'm a quick study. I am quick to admit what I don't know, and not afraid to ask questions when necessary. </li>
+              <li><strong>Communication</strong> — I'm an efficient communicator and a good listener. I practice my communication skills on <a href="https://taylor.gl/blog" class="link print:no-underline">my blog</a>. </li>
+            </ul>
+          </div>
+        </section>
+      </div>
+
+</div>

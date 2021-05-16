@@ -1,3 +1,4 @@
+const colors = require('tailwindcss/colors')
 module.exports = {
   purge: [
     '../lib/**/*.ex',
@@ -7,11 +8,27 @@ module.exports = {
   ],
   darkMode: false, // or 'media' or 'class'
   theme: {
-    extend: {},
+    extend: {
+      screens: {
+        'print': {'raw': 'print'}
+      }
+    },
     fontFamily: {
       sans: ["Montserrat", "sans-serif"],
       serif: ["Alegreya", "serif"],
     },
+    colors: {
+      transparent: 'transparent',
+      current: 'currentColor',
+      gray: colors.coolGray,
+      black: colors.black,
+      white: colors.white,
+      blue: colors.cyan,
+      red: colors.red,
+      yellow: colors.amber,
+      green: colors.lime,
+      purple: colors.violet
+    }
   },
   variants: {
     extend: {

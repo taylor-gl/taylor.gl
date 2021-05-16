@@ -1,14 +1,15 @@
-<nav class="pb-2">
-  <span class="link"><%= link "Home", to: Routes.post_path(@conn, :index) %></span>
-  <span class="text"> » </span>
-  <span class="link"><%= link "Blog", to: Routes.post_path(@conn, :index) %></span>
-</nav>
-
-<article>
-  <h1 class="markdown-h1"><%= @post.title %></h1>
-  <!-- evaluate EEx tags in content and then render the content -->
-  <%= raw(EEx.eval_string(@post.content)) %>
-  <div class="font-sans font-light text-center text-gray-500">
-    <strong>Published <%= @publish_date %></strong>
-  </div>
-</article>
+<div class="container max-w-prose m-auto px-8 py-4">
+  <nav class="pb-2">
+    <span class="link"><%= link "Home", to: Routes.home_path(@conn, :show) %></span>
+    <span class="text"> » </span>
+    <span class="link"><%= link "Blog", to: Routes.post_path(@conn, :index) %></span>
+  </nav>
+  <article>
+    <h1 class="markdown-h1"><%= @post.title %></h1>
+    <!-- evaluate EEx tags in content and then render the content -->
+    <%= raw(EEx.eval_string(@post.content)) %>
+    <div class="font-sans font-light text-center text-gray-500">
+      <strong>Published <%= @publish_date %></strong>
+    </div>
+  </article>
+</div>

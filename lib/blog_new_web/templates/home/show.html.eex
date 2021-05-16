@@ -1,0 +1,12 @@
+<div class="cyan-stripe-bg overflow-auto h-screen">
+  <div class="container max-w-prose mx-auto my-16 bg-gray-50 shadow-2xl rounded-l-full flex flex-row items-center transition duration-200 ease-in-out transform hover:scale-105 hover:shadow-3xl">
+    <div class="rounded-full m-3 shadow filter grayscale">
+      <img src="<%= Routes.static_path(@conn, "/images/Taylor_Lunt_face.jpg") %>" alt="Taylor Lunt's face" class="h-48 rounded-full" />
+    </div>
+    <div class="px-4">
+      <h1 class="font-sans text-5xl font-bold tracking-wider leading-tight">Taylor G. Lunt</h1>
+      <p class="text">I'm looking for work! Here is my <span class="link"><%= link "resume", to: Routes.resume_path(@conn, :show) %></span>.</p>
+      <p class="text">Also check out my <span class="link"><%= link "blog", to: Routes.post_path(@conn, :index) %></span>.</p>
+    </div>
+  </div>
+</div>

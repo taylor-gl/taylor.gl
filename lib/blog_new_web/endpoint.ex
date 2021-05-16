@@ -24,7 +24,7 @@ defmodule BlogNewWeb.Endpoint do
     at: "/",
     from: :blog_new,
     gzip: false,
-    only: ~w(css fonts images js favicon.ico robots.txt)
+    only: ~w(css fonts images js favicon.ico apple-touch-icon.png favicon-32x32.png favicon-16x16.png robots.txt pdf)
 
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.

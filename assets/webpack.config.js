@@ -42,7 +42,7 @@ module.exports = (env, options) => {
             'postcss-loader',
             'sass-loader',
           ],
-        }
+        },
       ]
     },
     plugins: [
