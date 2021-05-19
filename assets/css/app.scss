@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 
-/* Global */
+/* ======== == Colors ======= === */
 :root {
   /* there may be a better way to do this */
   --text: #3f3f46; /* text color */
@@ -11,12 +11,9 @@
   --visited: #7C3AED; /* link (visited) underline color, tailwind violet-600 */
   --footnote: #65A30D; /* footnote underline color, tailwind lime-600 */
 }
-body {
-  @apply bg-gray-50;
-  hyphens: auto;
-}
-::selection { background: var(--footnote); }
 
+
+/* ====== ==== Custom classes ======= === */
 .text { @apply font-serif text-lg leading-relaxed text-justify text-gray-700 py-1; }
 
 /* links with fancy colored underline */
@@ -60,7 +57,16 @@ body {
   height: 27.94cm;
 }
 
-/* Component classes for markdown-generated HTML */
+
+/* ========== Global styling ========== */
+body {
+  @apply bg-gray-50;
+  hyphens: auto;
+}
+::selection { background: var(--footnote); }
+
+
+/* ========== Component classes for markdown-generated HTML ========== */
 .markdown-p { @apply text; }
 
 .markdown-em { }
@@ -82,7 +88,6 @@ body {
 .markdown-h5 { @apply font-sans text-lg leading-relaxed text-left text-gray-900 pt-1; }
 .markdown-h6 { @apply font-sans text-lg leading-relaxed text-left text-gray-900 pt-1; }
 
-
 // subtly striped border to the left of blockquotes
 .markdown-blockquote .markdown-p::before {
   content: "";
@@ -95,7 +100,6 @@ body {
   left: -16px;
 }
 .markdown-blockquote .markdown-p { @apply text-gray-500 text-xl ml-8 mb-2 relative }
-
 
 .markdown-ul { @apply list-disc list-inside }
 .markdown-ol { @apply list-decimal list-inside }
@@ -125,7 +129,8 @@ body {
 // .markdown-code { }
 // .markdown-kbd { }
 
-/* Alerts and form errors */
+
+/* ========== Alerts and form errors ========== */
 .alert {
   padding: 15px;
   margin-bottom: 20px;
