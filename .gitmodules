@@ -1,6 +1,6 @@
 [submodule "priv/content"]
 	path = priv/content
-	url = https://github.com/taylor-gl/content.git
+	url = git@github.com:taylor-gl/content.git
 [submodule "priv/secret"]
 	path = priv/secret
-	url = https://github.com/taylor-gl/secret.git
+	url = git@github.com:taylor-gl/secret.git
