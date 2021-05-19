@@ -12,3 +12,10 @@ Also on my website is my [resume](https://taylor.gl/resume), which is the size o
 The posts/drafts themselves on my blog are not included in the public repo, as I don’t want my draft posts read by anyone, and I’d like it to be marginally more difficult to steal my posts. As such, they are included as a separate private submodule.
 
 When dealing with submodules, set `git config –global submodule.recurse true` to make sure pulling from the parent module also pulls from the submodule.
+
+To set up my website on a fresh server:
+1. Set up my github SSH key on the server, or accept that the `priv/secret` and `priv/content` submodules will not be cloned.
+2. clone with `git clone --recurse-submodules git@github.com:taylor-gl/taylor.gl.git`
+3. Set up a postgres database.
+4. Then, for production environment, run `priv/secret/start_server_prod.sh`
+5. Or, for the development environment, run `mix deps.get`, `mix ecto.migrate`, and, in `assets`, `npm install`. Then, run `mix phx.server` to start the server.
