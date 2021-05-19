@@ -35,5 +35,7 @@ module.exports = {
       visibility: ['hover', 'focus', 'group-hover', 'group-focus'],
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/aspect-ratio')
+  ],
 }
