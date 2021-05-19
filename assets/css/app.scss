@@ -30,7 +30,7 @@ body {
 .link:active { text-decoration-color: var(--text) }
 
 .footnote-text {
-  @apply font-serif text-lg leading-relaxed text-justify text-gray-800 underline relative inline-block;
+  @apply underline relative inline-block;
   text-decoration-color: var(--footnote);
   text-decoration-thickness: 3px;
   text-decoration-style: dotted;
@@ -94,13 +94,17 @@ body {
   height: 90%;
   left: -16px;
 }
-
 .markdown-blockquote .markdown-p { @apply text-gray-500 text-xl ml-8 mb-2 relative }
 
 
-.markdown-ul { }
-.markdown-ol { }
-.markdown-li { }
+.markdown-ul { @apply list-disc list-inside }
+.markdown-ol { @apply list-decimal list-inside }
+.markdown-ol .markdown-li::marker { @apply text-blue-700 text-xl; }
+.markdown-li { @apply text ml-4 }
+.markdown-ul .markdown-li::marker {
+  @apply text-blue-600;
+  content: "▶";
+}
 
 .markdown-hr { }
 
