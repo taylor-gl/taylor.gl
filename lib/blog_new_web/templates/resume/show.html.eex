@@ -97,7 +97,7 @@
               <li class="flex pb-2"><div class="pr-2"><i class="far fa-check-circle fa-lg text-gray-400 transition duration-300 ease-in-out group-hover:text-green-500"></i></div>Python</li>
               <li class="flex pb-2"><div class="pr-2"><i class="far fa-check-circle fa-lg text-gray-400 transition duration-300 ease-in-out group-hover:text-green-500"></i></div>C</li>
               <li class="flex pb-2"><div class="pr-2"><i class="far fa-check-circle fa-lg text-gray-400 transition duration-300 ease-in-out group-hover:text-green-500"></i></div>Databases/SQL</li>
-              <li class="flex pb-2"><div class="pr-2"><i class="far fa-check-circle fa-lg text-gray-400 transition duration-300 ease-in-out group-hover:text-green-500"></i></div>HTML/CSS/Javascript, including tailwindcss</li>
+              <li class="flex pb-2"><div class="pr-2"><i class="far fa-check-circle fa-lg text-gray-400 transition duration-300 ease-in-out group-hover:text-green-500"></i></div>HTML/CSS/JavaScript, including Tailwind CSS</li>
               <li class="flex pb-2"><div class="pr-2"><i class="far fa-check-circle fa-lg text-gray-400 transition duration-300 ease-in-out group-hover:text-green-500"></i></div>Linux/bash/shell</li>
               <li class="flex pb-2"><div class="pr-2"><i class="far fa-check-circle fa-lg text-gray-400 transition duration-300 ease-in-out group-hover:text-green-500"></i></div>Git/version control</li>
               <li class="flex pb-2"><div class="pr-2"><i class="far fa-check-circle fa-lg text-gray-400 transition duration-300 ease-in-out group-hover:text-green-500"></i></div>Debugging</li>
@@ -109,7 +109,7 @@
           <div class="group my-4 mx-2 p-2 border border-gray-500 rounded-xl font-serif text-base leading-relaxed text-gray-700 bg-white shadow transition duration-200 ease-in-out hover:bg-gray-50 hover:shadow-xl transform hover:-translate-y-2 hover:scale-105" style="hyphens:none;">
             <h2 class="relative z-10 font-sans text-lg leading-tight text-left text-gray-900 print:shadow-none"><strong>Soft Skills</strong></h2>
             <ul>
-              <li class="py-2"><strong>Self-awareness</strong> — I'm easy to work with and I'm a team player.</li>
+              <li class="py-2"><strong>Self-awareness</strong> — I'm easy to work with, and I'm a team player.</li>
               <li class="pb-2"><strong>Fast learning</strong> — I'm a quick study. I am quick to admit what I don't know, and not afraid to ask questions when necessary. </li>
               <li><strong>Communication</strong> — I'm an efficient communicator and a good listener. I practice my communication skills on <a href="https://taylor.gl/blog" class="link print:no-underline">my blog</a>. </li>
             </ul>
