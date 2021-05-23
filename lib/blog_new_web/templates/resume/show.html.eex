@@ -98,7 +98,7 @@
               <li class="flex pb-2"><div class="pr-2"><i class="far fa-check-circle fa-lg text-gray-400 transition duration-300 ease-in-out group-hover:text-green-500"></i></div>C</li>
               <li class="flex pb-2"><div class="pr-2"><i class="far fa-check-circle fa-lg text-gray-400 transition duration-300 ease-in-out group-hover:text-green-500"></i></div>Databases/SQL</li>
               <li class="flex pb-2"><div class="pr-2"><i class="far fa-check-circle fa-lg text-gray-400 transition duration-300 ease-in-out group-hover:text-green-500"></i></div>HTML/CSS/Javascript, including tailwindcss</li>
-              <li class="flex pb-2"><div class="pr-2"><i class="far fa-check-circle fa-lg text-gray-400 transition duration-300 ease-in-out group-hover:text-green-500"></i></div>Linix/bash/shell</li>
+              <li class="flex pb-2"><div class="pr-2"><i class="far fa-check-circle fa-lg text-gray-400 transition duration-300 ease-in-out group-hover:text-green-500"></i></div>Linux/bash/shell</li>
               <li class="flex pb-2"><div class="pr-2"><i class="far fa-check-circle fa-lg text-gray-400 transition duration-300 ease-in-out group-hover:text-green-500"></i></div>Git/version control</li>
               <li class="flex pb-2"><div class="pr-2"><i class="far fa-check-circle fa-lg text-gray-400 transition duration-300 ease-in-out group-hover:text-green-500"></i></div>Debugging</li>
               <li class="flex"><div class="pr-2"><i class="far fa-check-circle fa-lg text-gray-400 transition duration-300 ease-in-out group-hover:text-green-500"></i></div>Unit testing and test-driven development</li>
