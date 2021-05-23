@@ -46,7 +46,7 @@
     </header>
     <hr class="border-1 border-gray-900" />
     <section>
-      <p class="font-serif text-base leading-relaxed text-gray-700 pt-2">I am a recent University of Toronto graduate looking for work as a junior developer. I enjoy solving problems and writing useful, clean code. This will be my first software development job, and I'm excited.</p>
+      <p class="font-serif text-base leading-relaxed text-gray-700 pt-2">I am a recent University of Toronto graduate looking for work as a junior software developer. I am passionate about solving problems and writing useful, clean code. This will be my first software development job, and I'm excited.</p>
     </section>
     <div class="flex flex-row"> <!-- two columns -->
       <div class="flex-none w-8/12"> <!-- column 1 -->
@@ -65,7 +65,7 @@
           </div>
         </section>
         <section>
-          <p class="font-serif text-base leading-relaxed text-gray-700">I just graduated, so I have no professional software development experience yet. Here are some other jobs I've worked:</p>
+          <p class="font-serif text-base leading-relaxed text-gray-700">Here are some of the volunteer opportunities and jobs I've worked:</p>
           <div class="group relative my-4 mx-2 p-2 border border-gray-500 rounded-xl font-serif text-base leading-relaxed text-gray-700 bg-white shadow transition duration-200 ease-in-out hover:bg-gray-50 hover:shadow-xl transform hover:-translate-y-2 hover:scale-105">
             <i class="absolute z-0 fas fa-hamburger fa-fw fa-6x right-1 text-gray-200 transition duration-300 ease-in-out group-hover:text-green-400"></i>
             <h2 class="relative z-10 font-sans text-lg leading-tight text-left text-gray-900 print:shadow-none"><strong>A&W</strong></h2>
@@ -91,15 +91,16 @@
       <div class="flex-grow w-4/12"> <!-- column 2 -->
         <section>
           <div class="group my-4 mx-2 p-2 border border-gray-500 rounded-xl font-serif font-bold text-base leading-relaxed text-gray-600 bg-white shadow transition duration-200 ease-in-out hover:bg-gray-50 hover:shadow-xl transform hover:-translate-y-2 hover:scale-105" style="hyphens:none;">
-            <h2 class="relative z-10 font-sans text-lg leading-tight text-left text-gray-900 print:shadow-none"><strong>Software Skills</strong></h2>
+            <h2 class="relative z-10 font-sans text-lg leading-tight text-left text-gray-900 print:shadow-none"><strong>Programming Skills</strong></h2>
             <ul>
               <li class="flex py-2"><div class="pr-2"><i class="far fa-check-circle fa-lg text-gray-400 transition duration-300 ease-in-out group-hover:text-green-500"></i></div><p>Elixir/Phoenix (<a href="https://taylor.gl" class="link print:no-underline">e.g.&nbsp;my&nbsp;website</a>)</p></li>
               <li class="flex pb-2"><div class="pr-2"><i class="far fa-check-circle fa-lg text-gray-400 transition duration-300 ease-in-out group-hover:text-green-500"></i></div>Python</li>
               <li class="flex pb-2"><div class="pr-2"><i class="far fa-check-circle fa-lg text-gray-400 transition duration-300 ease-in-out group-hover:text-green-500"></i></div>C</li>
               <li class="flex pb-2"><div class="pr-2"><i class="far fa-check-circle fa-lg text-gray-400 transition duration-300 ease-in-out group-hover:text-green-500"></i></div>Databases/SQL</li>
               <li class="flex pb-2"><div class="pr-2"><i class="far fa-check-circle fa-lg text-gray-400 transition duration-300 ease-in-out group-hover:text-green-500"></i></div>HTML/CSS/Javascript, including tailwindcss</li>
-              <li class="flex pb-2"><div class="pr-2"><i class="far fa-check-circle fa-lg text-gray-400 transition duration-300 ease-in-out group-hover:text-green-500"></i></div>Unix/bash/shell</li>
+              <li class="flex pb-2"><div class="pr-2"><i class="far fa-check-circle fa-lg text-gray-400 transition duration-300 ease-in-out group-hover:text-green-500"></i></div>Linix/bash/shell</li>
               <li class="flex pb-2"><div class="pr-2"><i class="far fa-check-circle fa-lg text-gray-400 transition duration-300 ease-in-out group-hover:text-green-500"></i></div>Git/version control</li>
+              <li class="flex pb-2"><div class="pr-2"><i class="far fa-check-circle fa-lg text-gray-400 transition duration-300 ease-in-out group-hover:text-green-500"></i></div>Debugging</li>
               <li class="flex"><div class="pr-2"><i class="far fa-check-circle fa-lg text-gray-400 transition duration-300 ease-in-out group-hover:text-green-500"></i></div>Unit testing and test-driven development</li>
             </ul>
           </div>
