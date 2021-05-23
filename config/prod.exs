@@ -11,6 +11,13 @@ use Mix.Config
 # before starting your production server.
 config :blog_new, BlogNewWeb.Endpoint,
   url: [host: "taylor.gl", port: 80],
+  https: [
+    port: 443,
+    cipher_suite: :compatible,
+    keyfile: System.get_env("SOME_APP_SSL_KEY_PATH"),
+    certfile: System.get_env("SOME_APP_SSL_CERT_PATH"),
+    transport_options: [socket_opts: [:inet6]]
+  ],
   cache_static_manifest: "priv/static/cache_manifest.json"
 
 # Do not print debug messages in production

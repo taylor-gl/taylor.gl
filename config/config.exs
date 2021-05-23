@@ -17,7 +17,8 @@ config :blog_new, BlogNewWeb.Endpoint,
   secret_key_base: "G/oCV4GBLLDk3XZNL18xJTKrIgPjLOLxPRqvLJEqVWhGM8+vdSHqsMMeCd9RbYoi",
   render_errors: [view: BlogNewWeb.ErrorView, accepts: ~w(html json), layout: false],
   pubsub_server: BlogNew.PubSub,
-  live_view: [signing_salt: "MtavZK0i"]
+  live_view: [signing_salt: "MtavZK0i"],
+  force_ssl: [hsts: true]
 
 # Configures Elixir's Logger
 config :logger, :console,
