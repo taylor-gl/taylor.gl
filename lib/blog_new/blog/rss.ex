@@ -35,7 +35,7 @@ defmodule BlogNew.Blog.RSS do
     description = String.slice(plain_content, 0, @rss_item_desc_length - 3) <> "..."
     publish_datetime = DateTime.new!(publish_date, ~T[00:00:00], "GMT")
     publish_date_RFC1123 = Timex.format!(publish_datetime, "{RFC1123}")
-    link = Routes.url(BlogNewWeb.Endpoint) <> Routes.post_path(BlogNewWeb.Endpoint, :show, Post.post_id(markdown_filename))
+    link = "https://taylor.gl" <> Routes.post_path(BlogNewWeb.Endpoint, :show, Post.post_id(markdown_filename))
     ElixirRSS.item(title, description, publish_date_RFC1123, link, link) # using link as the guid
   end
 
