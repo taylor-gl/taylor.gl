@@ -1,7 +1,8 @@
 defmodule BlogNew.Blog.RSS do
+  import Ecto.Query, warn: false
   alias BlogNew.Repo
   alias BlogNew.Blog.Post
-  alias RSS, as: ElixirRSS
+  alias BlogNew.Blog.ElixirRSS
   alias BlogNewWeb.Router.Helpers, as: Routes
 
   @rss_item_desc_length 240
@@ -15,12 +16,14 @@ defmodule BlogNew.Blog.RSS do
     |> Timex.format!("{RFC1123}")
     channel = ElixirRSS.channel("Taylor G. Lunt's Blog", "https://taylor.gl", "Taylor G. Lunt's blog.", now_GMT_RFC1123, "en-us")
 
-    # build RSS items from database
-    items = Repo.all(Post)
+    # build RSS items from database (do not include draft posts)
+    query = from p in Post,
+            where: p.draft == false
+    items = Repo.all(query)
     |> Enum.sort(&Post.sort_posts/2)
     |> Enum.map(&(post_to_rss_item(&1)))
 
-    feed = RSS.feed(channel, items)
+    feed = ElixirRSS.feed(channel, items)
 
     # write feed to xml file
     File.write!("priv/static/rss.xml", feed)

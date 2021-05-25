@@ -151,7 +151,7 @@ defmodule BlogNew.Blog.Post do
     |> String.replace(~r/<%=?(%[^>]|.)*%>/, "") # all other EEx tags
     |> String.replace(~r/<[^>]*>/, "") # HTML tags
     |> String.replace(~r/\[(.*?)\]\(.*?\)/, "\\1") # replace markdown links with just the link text
-    |> String.replace(~r/[#*_~>`]+/, "") # remove certain markdown characters
+    |> String.replace(~r/[#*_~<>`&]+/, "") # remove certain characters
     |> String.replace(~r/\s+/, " ") # replace multiple whitespace characters with spaces again, in case removing tags created e.g. double spaces
     |> String.trim_leading()
   end
