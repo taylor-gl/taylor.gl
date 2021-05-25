@@ -6,7 +6,7 @@
     <div class="px-4">
       <h1 class="font-sans text-5xl font-bold tracking-wider leading-tight">Taylor G. Lunt</h1>
       <p class="text">I'm looking for work! Here is my <span class="link"><%= link "resume", to: Routes.resume_path(@conn, :show) %></span>.</p>
-      <p class="text">Also check out my <span class="link"><%= link "blog", to: Routes.post_path(@conn, :index) %></span>.</p>
+      <p class="text">Also check out my <span class="link"><%= link "blog", to: Routes.post_path(@conn, :index) %></span> (<span class="link"><%= link "RSS", to: Routes.static_path(@conn, "/rss.xml") %></span>).</p>
     </div>
   </div>
 </div>
