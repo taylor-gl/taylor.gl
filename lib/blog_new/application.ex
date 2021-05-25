@@ -13,8 +13,8 @@ defmodule BlogNew.Application do
       BlogNewWeb.Telemetry,
       # Start the PubSub system
       {Phoenix.PubSub, name: BlogNew.PubSub},
-      # Crawl the filesystem for new blog posts
-      {Task, &BlogNew.Blog.Post.crawl/0},
+      # Set up blog posts (including crawling the filesystem for posts, and setting up RSS feeds).
+      Supervisor.child_spec({Task, &BlogNew.Blog.Post.init/0}, id: :post_worker),
       # Start the Endpoint (http/https)
       BlogNewWeb.Endpoint
       # Start a worker by calling: BlogNew.Worker.start_link(arg)

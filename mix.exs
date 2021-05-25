@@ -47,7 +47,9 @@ defmodule BlogNew.MixProject do
       {:plug_cowboy, "~> 2.0"},
       {:earmark, "~> 1.4.15"},
       {:yamerl, "~> 0.8.1"},
-      {:tzdata, "~> 1.1"}
+      {:tzdata, "~> 1.1"},
+      {:rss, "~> 0.2.1"},
+      {:timex, "~> 3.0"}
     ]
   end
 

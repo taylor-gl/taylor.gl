@@ -12,14 +12,16 @@ defmodule BlogNew.Blog.Post do
     field :draft, :boolean
     field :publish_date, :date
 
+    field :plain_content, :string
+
     timestamps()
   end
 
   @doc false
   def changeset(post, attrs) do
     post
-    |> cast(attrs, [:title, :markdown_filename, :content, :draft, :publish_date])
-    |> validate_required([:title, :markdown_filename, :content, :draft, :publish_date])
+    |> cast(attrs, [:title, :markdown_filename, :content, :plain_content, :draft, :publish_date])
+    |> validate_required([:title, :markdown_filename, :content, :plain_content, :draft, :publish_date])
     |> unique_constraint(:markdown_filename)
   end
 
@@ -53,6 +55,15 @@ defmodule BlogNew.Blog.Post do
     else
       id |> (&(&1 <> ".md")).()
     end
+  end
+
+  @doc """
+  Does set-up for the posts, including crawling the filesystem for posts, and setting up RSS feeds.
+  Should be run on server startup.
+  """
+  def init do
+    BlogNew.Blog.Post.crawl()
+    BlogNew.Blog.RSS.gen_rss()
   end
 
   @doc """
@@ -100,7 +111,6 @@ defmodule BlogNew.Blog.Post do
              end
       if post do
         IO.puts("Processing blog post from file... #{filename}")
-        # IO.puts("updated: #{post.updated_at}, modified: #{modified_date}, comparison: #{NaiveDateTime.compare(post.updated_at, modified_date)}")
         changes = full_filename
         |> File.read!
         |> split
@@ -115,7 +125,8 @@ defmodule BlogNew.Blog.Post do
   end
 
   defp split(markdown_data) do
-    #Splits the frontmatter from the markdown and parses both. Expects a file like:
+    # Splits the frontmatter from the markdown and parses both. Parses the markdown section twice: once as HTML,
+    # and one as plain text with all HTML tags, EEx tags, and newline characters removed. Expects a file like:
     #
     #---
     #title: Example Title
@@ -125,7 +136,7 @@ defmodule BlogNew.Blog.Post do
     #
     #This is the beginning of the *Markdown* section...
     [_, frontmatter, markdown] = String.split(markdown_data, ~r/\n?-{3,}\n/, parts: 3)
-    {parse_yaml(frontmatter), Earmark.as_html!(markdown, escape: false, smartypants: false, postprocessor: &markdown_process_ast_leaf/1)}
+    {parse_yaml(frontmatter), Earmark.as_html!(markdown, escape: false, smartypants: false, postprocessor: &markdown_process_ast_leaf/1), format_plain_content(markdown)}
   end
 
   defp parse_yaml(yaml) do
@@ -133,18 +144,31 @@ defmodule BlogNew.Blog.Post do
     parsed
   end
 
-  defp add_view_import({props, content}) do
-    # add an alias to the content, so that the EEx parser can find functions in the view
-    # this is so I don't have to type BlogNewWeb.PostView.footnote just to add a footnote
-    {props, "<% import BlogNewWeb.PostView %>\n" <> content}
+  defp format_plain_content(markdown) do
+    markdown
+    |> String.replace(~r/\s+/, " ") # replace e.g. newline characters, multiple spaces in a row, etc. with a single space
+    |> String.replace(~r/<%=? footnote\("(.*?)".*?\) %>/, "\\1") # replace footnotes with their regular text, ignoring hover text
+    |> String.replace(~r/<%=?(%[^>]|.)*%>/, "") # all other EEx tags
+    |> String.replace(~r/<[^>]*>/, "") # HTML tags
+    |> String.replace(~r/\[(.*?)\]\(.*?\)/, "\\1") # replace markdown links with just the link text
+    |> String.replace(~r/[#*_~>`]+/, "") # remove certain markdown characters
+    |> String.replace(~r/\s+/, " ") # replace multiple whitespace characters with spaces again, in case removing tags created e.g. double spaces
+    |> String.trim_leading()
   end
 
-  defp extract({props, content}) do
+  defp add_view_import({props, content, plain_content}) do
+    # add an alias to the content, so that the EEx parser can find functions in the view
+    # this is so I don't have to type BlogNewWeb.PostView.footnote just to add a footnote
+    {props, "<% import BlogNewWeb.PostView %>\n" <> content, plain_content}
+  end
+
+  defp extract({props, content, plain_content}) do
     # extract properties from the YAML and put them into the post
     %{title: get_prop(props, "title"),
       publish_date: Date.from_iso8601!(get_prop(props, "publish_date")),
       draft: string_to_boolean(get_prop(props, "draft")),
-      content: content}
+      content: content,
+      plain_content: plain_content}
   end
 
   defp get_prop(props, key) do
