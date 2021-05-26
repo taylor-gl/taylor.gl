@@ -1,5 +1,5 @@
 # Taylor G. Lunt's Website
-[My website/blog](https://taylor.gl) is a Phoenix application, which uses `postcss-loader` and `tailwindcss` for styling, as per [this guide](https://pragmaticstudio.com/tutorials/adding-tailwind-css-to-phoenix).
+[My website/blog](https://taylor.gl) is a Phoenix application, which uses `postcss-loader` and `tailwindcss` for styling, as per [this guide](https://pragmaticstudio.com/tutorials/adding-tailwind-css-to-phoenix). It has an RSS feed and supports auto-discovery.
 
 Since `tailwindcss` generates thousands of CSS classes, most of which are unused by this project, we automatically purge the unneeded classes when we are running in production (but not in development).
 
