@@ -129,6 +129,15 @@ body {
 // .markdown-code { }
 // .markdown-kbd { }
 
+h1 .markdown-header-anchor,
+h2 .markdown-header-anchor,
+h3 .markdown-header-anchor,
+h4 .markdown-header-anchor,
+h5 .markdown-header-anchor,
+h6 .markdown-header-anchor { @apply -ml-8 }
+
+.markdown-header-anchor-img { @apply text-gray-400 }
+
 
 /* ========== Alerts and form errors ========== */
 .alert {

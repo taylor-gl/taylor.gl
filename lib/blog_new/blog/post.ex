@@ -117,7 +117,7 @@ defmodule BlogNew.Blog.Post do
         |> File.read!
         |> split
         |> add_view_import
-        |> add_ids_to_headers
+        |> add_anchors_to_headers
         |> extract
 
         {post, changes}
@@ -193,15 +193,16 @@ defmodule BlogNew.Blog.Post do
 
   @doc """
   Adds unique ids to any header tags in the post content which do not contain other tags.
+  Also adds an anchor to the beginning of the header. Uses the fontawesome glyph fa-link for the anchor link icon.
 
   For example, <h3 class="markdown-h3>Header title</h3> would become:
-  <h3 class="markdown-h3" id="header-title">Header title</h3>
+  <h3 class="markdown-h3" id="header-title"><a class="markdown-header-anchor" href="#header-title"><i class="markdown-header-anchor-img fas fa-link"></i></a>Header title</h3>
   """
-  def add_ids_to_headers({props, html, plain_content}) do
+  def add_anchors_to_headers({props, html, plain_content}) do
     # regex should be fine as we are only considering header tags which do not contain other tags
     new_html = Regex.replace(~r/<(h\d.*?)>(.*?)<(\/h\d)>/s, html, fn _, opening, content, closing ->
       id = header_id(content)
-      "<#{opening} id=\"#{id}\">#{content}<#{closing}>"
+      "<#{opening} id=\"#{id}\"><a class=\"markdown-header-anchor\" href=\"\##{id}\"><i class=\"markdown-header-anchor-img fas fa-link\"></i></a>#{content}<#{closing}>"
     end)
     {props, new_html, plain_content}
   end
