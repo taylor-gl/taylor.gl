@@ -4,6 +4,8 @@ defmodule BlogNew.Blog.Post do
   alias BlogNew.Repo
   alias BlogNew.Blog.Post
 
+  @header_id_max_length 30
+
   schema "posts" do
     field :markdown_filename, :string
     field :title, :string
@@ -115,6 +117,7 @@ defmodule BlogNew.Blog.Post do
         |> File.read!
         |> split
         |> add_view_import
+        |> add_ids_to_headers
         |> extract
 
         {post, changes}
@@ -186,6 +189,32 @@ defmodule BlogNew.Blog.Post do
   def markdown_process_ast_leaf(s) when is_bitstring(s), do: s
   def markdown_process_ast_leaf({tag, attrs, _, messages}) do
     {tag, attrs ++ [{"class", "markdown-#{tag}"}], nil, messages}
+  end
+
+  @doc """
+  Adds unique ids to any header tags in the post content which do not contain other tags.
+
+  For example, <h3 class="markdown-h3>Header title</h3> would become:
+  <h3 class="markdown-h3" id="header-title">Header title</h3>
+  """
+  def add_ids_to_headers({props, html, plain_content}) do
+    # regex should be fine as we are only considering header tags which do not contain other tags
+    new_html = Regex.replace(~r/<(h\d.*?)>(.*?)<(\/h\d)>/s, html, fn _, opening, content, closing ->
+      id = header_id(content)
+      "<#{opening} id=\"#{id}\">#{content}<#{closing}>"
+    end)
+    {props, new_html, plain_content}
+  end
+
+  defp header_id(header_content) do
+    header_content
+    |> String.to_charlist()
+    |> Enum.filter(&(&1 in 32..127)) # include only ascii characters
+    |> List.to_string
+    |> String.downcase(:ascii)
+    |> String.replace(~r/[^\w\s\d]/, "") # keep only alphanumeric and space characters
+    |> String.replace(~r/[\s]+/, "-") # replace spaces with hyphens
+    |> String.slice(0, @header_id_max_length)
   end
 
   defp string_to_boolean("true"), do: true
