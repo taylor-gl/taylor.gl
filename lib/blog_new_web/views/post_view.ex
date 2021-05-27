@@ -19,4 +19,13 @@ defmodule BlogNewWeb.PostView do
     Phoenix.View.render_to_string(BlogNewWeb.PostView, "footnote.html", text: text, hover: hover)
     |> String.trim_trailing # remove trailing newline etc. from template
   end
+
+  def title(view_template_name, assigns) do
+    case view_template_name do
+      "index.html" ->
+        "Taylor G. Lunt's Blog"
+      "show.html" ->
+        assigns.post.title
+    end
+  end
 end
