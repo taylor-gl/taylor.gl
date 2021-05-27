@@ -27,9 +27,13 @@ defmodule BlogNew.Blog.RSS do
 
     # write feed to xml file
     File.write!("priv/static/rss.xml", feed)
+
     # legacy url from old Zola static site
-    File.mkdir!("priv/static/static")
-    File.write!("priv/static/static/rss.23a67eb85f.xml", feed)
+    case File.mkdir("priv/static/static") do
+      :ok -> File.write!("priv/static/static/rss.23a67eb85f.xml", feed)
+      {:error, :eexist} -> File.write!("priv/static/static/rss.23a67eb85f.xml", feed)
+      {:error, _} -> IO.puts("Failed to write rss.23a67eb85f.xml")
+    end
   end
 
   defp post_to_rss_item(%Post{plain_content: plain_content, title: title, publish_date: publish_date, markdown_filename: markdown_filename}) do
