@@ -28,6 +28,7 @@ defmodule BlogNew.Blog.RSS do
     # write feed to xml file
     File.write!("priv/static/rss.xml", feed)
     # legacy url from old Zola static site
+    File.mkdir!("priv/static/static")
     File.write!("priv/static/static/rss.23a67eb85f.xml", feed)
   end
 
