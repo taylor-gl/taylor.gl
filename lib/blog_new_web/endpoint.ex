@@ -23,7 +23,7 @@ defmodule BlogNewWeb.Endpoint do
   plug Plug.Static,
     at: "/",
     from: :blog_new,
-    gzip: false,
+    gzip: true,
     only: ~w(css fonts images js favicon.ico apple-touch-icon.png favicon-32x32.png favicon-16x16.png robots.txt pdf rss.xml static)
 
   # Code reloading can be explicitly enabled under the
