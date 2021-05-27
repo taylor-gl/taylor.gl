@@ -27,6 +27,8 @@ defmodule BlogNew.Blog.RSS do
 
     # write feed to xml file
     File.write!("priv/static/rss.xml", feed)
+    # legacy url from old Zola static site
+    File.write!("priv/static/static/rss.23a67eb85f.xml", feed)
   end
 
   defp post_to_rss_item(%Post{plain_content: plain_content, title: title, publish_date: publish_date, markdown_filename: markdown_filename}) do
