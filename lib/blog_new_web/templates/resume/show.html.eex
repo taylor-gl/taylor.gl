@@ -56,7 +56,7 @@
             <h2 class="relative z-10 font-sans text-lg leading-tight text-left text-gray-900"><strong>University of Toronto</strong></h2>
             <p class="relative z-10 text-gray-500"><em>Graduated <strong>June 2021</strong>.</em></p>
             <p class="relative z-10">Bachelor of Science — Dual major in Computer Science and Psychology.
-              My GPA was <strong class="font-sans">3.18</strong>.</p>
+              I graduated with a GPA of <strong class="font-sans">3.18</strong>.</p>
             <ul class="relative z-10">
               <li class="flex pt-1 pb-1"><div class="pr-1"><i class="fas fa-check text-gray-400 transition duration-300 ease-in-out group-hover:text-green-500"></i></div>I participated in several group software development projects, including developing one real web application for a non-profit organization using Agile/Scrum methodologies.</li>
               <li class="flex pb-1"><div class="pr-1"><i class="fas fa-check text-gray-400 transition duration-300 ease-in-out group-hover:text-green-500"></i></div>I implemented an extent-based file system in C.</li>
@@ -75,8 +75,8 @@
           </div>
           <div class="group relative my-4 mx-2 p-2 border border-gray-500 rounded-xl font-serif text-base leading-relaxed text-gray-700 bg-white shadow transition duration-200 ease-in-out hover:bg-gray-50 hover:shadow-xl transform hover:-translate-y-2 hover:scale-105">
             <i class="absolute z-0 fas fa-school fa-fw fa-6x right-1 text-gray-200 transition duration-300 ease-in-out group-hover:text-green-400"></i>
-            <p class="relative z-10 font-sans text-lg leading-tight text-left text-gray-900 print:shadow-none"><strong>Red Deer Regional Catholic Schools</strong></p>
-            <h2 class="relative z-10 text-gray-500"><em>Red Deer, Alberta, during <strong>Summer 2015</strong></em></h2>
+            <p class="relative z-10 font-sans text-lg leading-tight text-left text-gray-900 print:shadow-none"><strong>Red Deer Catholic Regional Schools</strong></p>
+            <h2 class="relative z-10 text-gray-500"><em>Red Deer, Alberta, <strong>Summer 2015</strong></em></h2>
             <p class="relative z-10">IT Department</p>
             <p class="relative z-10">A summer job where I went with a team from school to school, servicing the school's computers.</p>
           </div>
