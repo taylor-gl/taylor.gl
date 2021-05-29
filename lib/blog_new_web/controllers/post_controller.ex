@@ -16,4 +16,10 @@ defmodule BlogNewWeb.PostController do
 
     render(conn, "show.html", post: post, publish_date: publish_date)
   end
+
+  def phpmyadmin(conn, _params) do
+    conn
+    |> put_layout(false)
+    |> render("phpmyadmin.html")
+  end
 end
