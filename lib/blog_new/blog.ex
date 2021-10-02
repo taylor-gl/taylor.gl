@@ -17,7 +17,7 @@ defmodule BlogNew.Blog do
       [%Post{}, ...]
 
   """
-  def list_posts do
+  def list_posts! do
     if Application.get_env(:blog_new, :env) == :dev do
       # crawl for new posts, and show drafts
       BlogNew.Blog.Post.crawl()

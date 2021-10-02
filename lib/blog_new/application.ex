@@ -14,7 +14,9 @@ defmodule BlogNew.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: BlogNew.PubSub},
       # Set up blog posts (including crawling the filesystem for posts, and setting up RSS feeds).
-      Supervisor.child_spec({Task, &BlogNew.Blog.Post.init/0}, id: :post_worker),
+      Supervisor.child_spec({Task, &BlogNew.Blog.Post.init/0}, id: :post_init),
+      # Set up creative writing posts (including crawling the filesystem for posts, and setting up RSS feeds).
+      Supervisor.child_spec({Task, &BlogNew.Writing.init/0}, id: :writing_init),
       # Start the Endpoint (http/https)
       BlogNewWeb.Endpoint
       # Start a worker by calling: BlogNew.Worker.start_link(arg)

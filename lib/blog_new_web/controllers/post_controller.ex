@@ -2,10 +2,9 @@ defmodule BlogNewWeb.PostController do
   use BlogNewWeb, :controller
 
   alias BlogNew.Blog
-  alias BlogNew.Blog.Post
 
   def index(conn, _params) do
-    posts = Blog.list_posts()
+    posts = Blog.list_posts!()
     render(conn, "index.html", posts: posts)
   end
 

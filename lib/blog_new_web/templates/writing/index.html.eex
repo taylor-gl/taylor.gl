@@ -1,0 +1,74 @@
+<div class="container max-w-prose m-auto px-8 py-4">
+  <div>
+  <nav class="pb-2">
+    <span class="link"><%= link "Home", to: Routes.home_path(@conn, :show) %></span>
+  </nav>
+  <h1 class="font-sans text-4xl font-bold tracking-wider leading-relaxed pb-2">Poetry</h1>
+  <h2 class="font-sans text-2xl font-bold tracking-wider leading-relaxed pb-2">Recent</h2>
+  <ul class="text list-disc">
+    <%= for writing <- @writings do %>
+      <%= if writing.era == :recent && writing.type == :poem do %>
+      <li class="link">
+        <%= if writing.draft do %>
+          <strong class="text-red-700">DRAFT</strong>
+        <% end %>
+        <%= link writing.title, to: Routes.writing_path(@conn, :show, slug(writing)) %>
+      </li>
+      <% end %>
+    <% end %>
+  </ul>
+  <h2 class="font-sans text-2xl font-bold tracking-wider leading-relaxed pb-2">University</h2>
+  <ul class="text list-disc">
+    <%= for writing <- @writings do %>
+      <%= if writing.era == :university && writing.type == :poem do %>
+      <li class="link">
+        <%= if writing.draft do %>
+          <strong class="text-red-700">DRAFT</strong>
+        <% end %>
+        <%= link writing.title, to: Routes.writing_path(@conn, :show, slug(writing)) %>
+      </li>
+      <% end %>
+    <% end %>
+  </ul>
+  <h2 class="font-sans text-2xl font-bold tracking-wider leading-relaxed pb-2">High School</h2>
+  <ul class="text list-disc">
+    <%= for writing <- @writings do %>
+      <%= if writing.era == :high_school && writing.type == :poem do %>
+      <li class="link">
+        <%= if writing.draft do %>
+          <strong class="text-red-700">DRAFT</strong>
+        <% end %>
+        <%= link writing.title, to: Routes.writing_path(@conn, :show, slug(writing)) %>
+      </li>
+      <% end %>
+    <% end %>
+  </ul>
+  <h1 class="font-sans text-4xl font-bold tracking-wider leading-relaxed pb-2">Short Stories</h1>
+  <h2 class="font-sans text-2xl font-bold tracking-wider leading-relaxed pb-2">University</h2>
+  <ul class="text list-disc">
+    <%= for writing <- @writings do %>
+      <%= if writing.era == :high_school && writing.type == :story do %>
+      <li class="link">
+        <%= if writing.draft do %>
+          <strong class="text-red-700">DRAFT</strong>
+        <% end %>
+        <%= link writing.title, to: Routes.writing_path(@conn, :show, slug(writing)) %>
+      </li>
+      <% end %>
+    <% end %>
+  </ul>
+  <h2 class="font-sans text-2xl font-bold tracking-wider leading-relaxed pb-2">High School</h2>
+  <ul class="text list-disc">
+    <%= for writing <- @writings do %>
+      <%= if writing.era == :university && writing.type == :story do %>
+      <li class="link">
+        <%= if writing.draft do %>
+          <strong class="text-red-700">DRAFT</strong>
+        <% end %>
+        <%= link writing.title, to: Routes.writing_path(@conn, :show, slug(writing)) %>
+      </li>
+      <% end %>
+    <% end %>
+  </ul>
+</div>
+</div>
