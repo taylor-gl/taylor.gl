@@ -4,7 +4,10 @@ defmodule BlogNewWeb.PostControllerTest do
   alias BlogNew.Blog
 
   @create_attrs %{markdown_filename: "some markdown_filename", title: "some title"}
-  @update_attrs %{markdown_filename: "some updated markdown_filename", title: "some updated title"}
+  @update_attrs %{
+    markdown_filename: "some updated markdown_filename",
+    title: "some updated title"
+  }
   @invalid_attrs %{markdown_filename: nil, title: nil}
 
   def fixture(:post) do
@@ -75,6 +78,7 @@ defmodule BlogNewWeb.PostControllerTest do
     test "deletes chosen post", %{conn: conn, post: post} do
       conn = delete(conn, Routes.post_path(conn, :delete, post))
       assert redirected_to(conn) == Routes.post_path(conn, :index)
+
       assert_error_sent 404, fn ->
         get(conn, Routes.post_path(conn, :show, post))
       end

@@ -7,9 +7,11 @@ defmodule BlogNew.BlogTest do
   doctest Post
 
   describe "posts" do
-
     @valid_attrs %{markdown_filename: "some markdown_filename", title: "some title"}
-    @update_attrs %{markdown_filename: "some updated markdown_filename", title: "some updated title"}
+    @update_attrs %{
+      markdown_filename: "some updated markdown_filename",
+      title: "some updated title"
+    }
     @invalid_attrs %{markdown_filename: nil, title: nil}
 
     def post_fixture(attrs \\ %{}) do

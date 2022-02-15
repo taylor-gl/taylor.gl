@@ -2,8 +2,8 @@ use Mix.Config
 
 # Configure your database
 config :blog_new, BlogNew.Repo,
-  username: "postgres",
-  password: "postgres",
+  username: "blognew",
+  password: "blognew",
   database: "blog_new_dev",
   hostname: "localhost",
   show_sensitive_data_on_connection_error: true,

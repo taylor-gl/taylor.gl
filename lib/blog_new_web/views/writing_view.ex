@@ -9,6 +9,7 @@ defmodule BlogNewWeb.WritingView do
     case view_template_name do
       "index.html" ->
         "Taylor G. Lunt's Creative Writing"
+
       "show.html" ->
         assigns.writing.title
     end

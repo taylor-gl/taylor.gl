@@ -6,5 +6,4 @@ defmodule BlogNew.Repo.Migrations.ChangePlainContentToText do
       modify :plain_content, :text
     end
   end
-
 end

@@ -21,8 +21,10 @@ defmodule BlogNewWeb.Router do
     get "/blog/:id", PostController, :show
     get "/creative-writing", WritingController, :index
     get "/creative-writing/:slug", WritingController, :show
-    get "/phpmyadmin", PostController, :phpmyadmin # joke url for blog post 15
-    get "/phpmyadmin.", PostController, :phpmyadmin # joke url for blog post 15
+    # joke url for blog post 15
+    get "/phpmyadmin", PostController, :phpmyadmin
+    # joke url for blog post 15
+    get "/phpmyadmin.", PostController, :phpmyadmin
     get "/resume/", ResumeController, :show
   end
 

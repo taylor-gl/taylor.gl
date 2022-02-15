@@ -10,8 +10,10 @@ defmodule BlogNewWeb.PostController do
 
   def show(conn, %{"id" => id}) do
     post = Blog.get_post!(id)
-    publish_date = post.publish_date
-    |> Calendar.strftime("%d %B %Y")
+
+    publish_date =
+      post.publish_date
+      |> Calendar.strftime("%d %B %Y")
 
     render(conn, "show.html", post: post, publish_date: publish_date)
   end

@@ -5,6 +5,5 @@ defmodule BlogNew.Repo.Migrations.AddPlainContentsToPost do
     alter table(:posts) do
       add :plain_content, :string
     end
-
   end
 end

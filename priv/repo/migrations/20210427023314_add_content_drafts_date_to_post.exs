@@ -7,6 +7,5 @@ defmodule BlogNew.Repo.Migrations.AddContentDraftsDateToPost do
       add :draft, :boolean
       add :publish_date, :date
     end
-
   end
 end

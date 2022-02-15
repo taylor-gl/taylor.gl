@@ -53,11 +53,14 @@ defmodule BlogNew.Writing do
     if Application.get_env(:blog_new, :env) == :dev do
       # crawl for new writings, and show drafts
       BlogNew.Writing.crawl()
+
       Repo.all(Writing)
       |> Enum.sort(&Writing.sort_writings/2)
     else
-      query = from w in Writing,
-              where: w.draft == false
+      query =
+        from w in Writing,
+          where: w.draft == false
+
       Repo.all(query)
       |> Enum.sort(&Writing.sort_writings/2)
     end
@@ -72,6 +75,7 @@ defmodule BlogNew.Writing do
   """
   def get_writing!(slug) do
     filename = Writing.writing_filename(slug)
+
     if Application.get_env(:blog_new, :env) == :dev do
       # crawl for new writings, and show drafts
       BlogNew.Writing.crawl()
@@ -221,6 +225,8 @@ defmodule BlogNew.Writing do
     # This is the beginning of the *Markdown* section...
     [_, frontmatter, markdown] = String.split(markdown_data, ~r/\n?-{3,}\n/, parts: 3)
 
+    IO.inspect(frontmatter)
+
     {parse_yaml(frontmatter),
      Earmark.as_html!(markdown,
        escape: false,
@@ -261,9 +267,16 @@ defmodule BlogNew.Writing do
 
   defp extract({props, content, plain_content}) do
     # extract properties from the YAML and put them into the writing
+    date = get_prop(props, "publish_date")
+
     %{
       title: get_prop(props, "title"),
-      publish_date: Date.from_iso8601!(get_prop(props, "publish_date")),
+      publish_date:
+        if !is_nil(date) do
+          Date.from_iso8601!(date)
+        else
+          nil
+        end,
       draft: string_to_boolean(get_prop(props, "draft")),
       content: content,
       plain_content: plain_content

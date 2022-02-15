@@ -21,11 +21,14 @@ defmodule BlogNew.Blog do
     if Application.get_env(:blog_new, :env) == :dev do
       # crawl for new posts, and show drafts
       BlogNew.Blog.Post.crawl()
+
       Repo.all(Post)
       |> Enum.sort(&Post.sort_posts/2)
     else
-      query = from p in Post,
-              where: p.draft == false
+      query =
+        from p in Post,
+          where: p.draft == false
+
       Repo.all(query)
       |> Enum.sort(&Post.sort_posts/2)
     end
@@ -49,6 +52,7 @@ defmodule BlogNew.Blog do
   """
   def get_post!(id) do
     filename = Post.post_filename(id)
+
     if Application.get_env(:blog_new, :env) == :dev do
       # crawl for new posts, and show drafts
       BlogNew.Blog.Post.crawl()

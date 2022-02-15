@@ -6,11 +6,11 @@ defmodule BlogNew.Repo.Migrations.CreateWritings do
       add :markdown_filename, :string
       add :title, :string
 
-      add :content, :string
+      add :content, :text
       add :draft, :boolean
       add :publish_date, :date
 
-      add :plain_content, :string
+      add :plain_content, :text
 
       add :era, :string
 
