@@ -225,8 +225,6 @@ defmodule BlogNew.Writing do
     # This is the beginning of the *Markdown* section...
     [_, frontmatter, markdown] = String.split(markdown_data, ~r/\n?-{3,}\n/, parts: 3)
 
-    IO.inspect(frontmatter)
-
     {parse_yaml(frontmatter),
      Earmark.as_html!(markdown,
        escape: false,
