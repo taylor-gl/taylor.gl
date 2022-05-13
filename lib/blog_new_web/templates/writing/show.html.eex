@@ -1,4 +1,4 @@
-<div class="container max-w-md m-auto px-8 py-4 flex justify-center h-screen">
+<div class="container <%= if @writing.type == :poem do "max-w-md" else "max-w-prose" end %> m-auto px-8 py-4 flex justify-center h-screen">
   <div>
   <nav class="pb-2">
     <span class="link"><%= link "Home", to: Routes.home_path(@conn, :show) %></span>
