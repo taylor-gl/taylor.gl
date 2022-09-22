@@ -13,19 +13,33 @@ defmodule BlogNewWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", BlogNewWeb do
-    pipe_through :browser
+  # For files I want to stick on my website, without cache-busting URLs that change every time I build a release of the server.
+  pipeline :static_literal do
+    plug Plug.Static,
+      at: "/static",
+    from: {:blog_new, "priv/literal"}
+  end
 
-    get "/", HomeController, :show
-    get "/blog", PostController, :index
-    get "/blog/:id", PostController, :show
-    get "/creative-writing", WritingController, :index
-    get "/creative-writing/:slug", WritingController, :show
-    # joke url for blog post 15
-    get "/phpmyadmin", PostController, :phpmyadmin
-    # joke url for blog post 15
-    get "/phpmyadmin.", PostController, :phpmyadmin
-    get "/resume/", ResumeController, :show
+  scope "/", BlogNewWeb do
+    scope "/" do
+      pipe_through :browser
+
+      get "/", HomeController, :show
+      get "/blog", PostController, :index
+      get "/blog/:id", PostController, :show
+      get "/creative-writing", WritingController, :index
+      get "/creative-writing/:slug", WritingController, :show
+      # joke url for blog post 15
+      get "/phpmyadmin", PostController, :phpmyadmin
+      # joke url for blog post 15
+      get "/phpmyadmin.", PostController, :phpmyadmin
+      get "/resume/", ResumeController, :show
+    end
+
+    scope "/static" do
+      pipe_through :static_literal
+      get "/*path", ErrorController, :not_found
+    end
   end
 
   # Other scopes may use custom stacks.
