@@ -1,0 +1,72 @@
+name: Build & Deploy
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          submodules: false
+      - name: Prepare to checkout submodules
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_CONTENT_DEPLOY_KEY }}" > ~/.ssh/taylor.gl.content.deploy
+          echo "${{ secrets.SSH_SECRET_DEPLOY_KEY }}" > ~/.ssh/taylor.gl.secret.deploy
+          chmod 600 ~/.ssh/taylor.gl.content.deploy
+          chmod 600 ~/.ssh/taylor.gl.secret.deploy
+          cat << EOF > ~/.ssh/config
+          # Submodule content
+          Host taylor-gl-content
+              HostName github.com
+              User git
+              IdentityFile ~/.ssh/taylor.gl.content.deploy
+
+          # Submodule secret
+          Host taylor-gl-secret
+              HostName github.com
+              User git
+              IdentityFile ~/.ssh/taylor.gl.secret.deploy
+          EOF
+      - name: Checkout submodules
+        run: git submodule update --init --recursive
+      - name: Transfer files to server
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          source: "./*"
+          target: "/root/deploy"
+      - name: Deploy Elixir/Phoenix Application
+        uses: appleboy/ssh-action@v1.0.2
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            grep -qxF 'export SECRET_KEY_BASE=${{ secrets.SECRET_KEY_BASE }}' ~/.profile || echo 'export SECRET_KEY_BASE=${{ secrets.SECRET_KEY_BASE }}' >> ~/.profile
+            sed -i '/^export SECRET_KEY_BASE=/c\export SECRET_KEY_BASE=${{ secrets.SECRET_KEY_BASE }}' ~/.profile
+
+            grep -qxF 'export DATABASE_URL=ecto://postgres:postgres@localhost/blog_new_prod' ~/.profile || echo 'export DATABASE_URL=ecto://postgres:postgres@localhost/blog_new_prod' >> ~/.profile
+            sed -i '/^export DATABASE_URL=/c\export DATABASE_URL=ecto://postgres:postgres@localhost/blog_new_prod' ~/.profile
+            . ~/.profile
+
+            cd /root/deploy
+            mix deps.get
+            MIX_ENV=prod mix compile
+            systemctl stop blog_new.service
+            MIX_ENV=prod mix ecto.create
+            MIX_ENV=prod mix ecto.migrate
+
+            cd assets
+            npm install
+            npm run deploy
+            cd ..
+            MIX_ENV=prod mix phx.digest
+            MIX_ENV=prod mix release --overwrite
+            systemctl start blog_new.service

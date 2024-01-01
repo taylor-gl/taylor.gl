@@ -28,6 +28,8 @@ defmodule BlogNewWeb.ConnCase do
 
       # The default endpoint for testing
       @endpoint BlogNewWeb.Endpoint
+
+      use BlogNewWeb, :verified_routes
     end
   end
 

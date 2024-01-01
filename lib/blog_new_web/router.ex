@@ -1,6 +1,8 @@
 defmodule BlogNewWeb.Router do
   use BlogNewWeb, :router
 
+  @env Application.compile_env(:blog_new, :env)
+
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
@@ -25,7 +27,10 @@ defmodule BlogNewWeb.Router do
     get "/phpmyadmin", PostController, :phpmyadmin
     # joke url for blog post 15
     get "/phpmyadmin.", PostController, :phpmyadmin
-    get "/resume/", ResumeController, :show
+    get "/resume", ResumeController, :show
+    get "/rss.xml", RssController, :index
+    # legacy URL from old Zola static site
+    get "/static/rss.23a67eb85f.xml", RssController, :index
   end
 
   # Other scopes may use custom stacks.
@@ -40,7 +45,7 @@ defmodule BlogNewWeb.Router do
   # If your application does not have an admins-only section yet,
   # you can use Plug.BasicAuth to set up some basic authentication
   # as long as you are also using SSL (which you should anyway).
-  if Mix.env() in [:dev, :test] do
+  if @env in [:dev, :test] do
     import Phoenix.LiveDashboard.Router
 
     scope "/" do

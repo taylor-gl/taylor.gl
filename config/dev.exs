@@ -1,11 +1,11 @@
-use Mix.Config
+import Config
 
 # Configure your database
 config :blog_new, BlogNew.Repo,
-  username: "blognew",
-  password: "blognew",
-  database: "blog_new_dev",
+  username: "postgres",
+  password: "postgres",
   hostname: "localhost",
+  database: "blog_new_dev",
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
 

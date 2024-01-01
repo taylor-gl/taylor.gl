@@ -1,9 +1,9 @@
-<div class="container <%= if @writing.type == :poem do "max-w-md" else "max-w-prose" end %> m-auto px-8 py-4 flex justify-center h-screen">
+<div class={if @writing.type == :poem do "container max-w-md m-auto px-8 py-4 flex justify-center h-screen" else "container max-w-prose m-auto px-8 py-4 flex justify-center h-screen" end}>
   <div>
   <nav class="pb-2">
-    <span class="link"><%= link "Home", to: Routes.home_path(@conn, :show) %></span>
+    <span class="link"><%= link "Home", to: ~p"/" %></span>
     <span class="text"> » </span>
-    <span class="link"><%= link "Creative Writing", to: Routes.writing_path(@conn, :index) %></span>
+    <span class="link"><%= link "Creative Writing", to: ~p"/creative-writing" %></span>
   </nav>
   <article>
     <h1 class="markdown-h1"><%= @writing.title %></h1>

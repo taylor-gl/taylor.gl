@@ -3,7 +3,6 @@ defmodule BlogNew.Blog.RSS do
   alias BlogNew.Repo
   alias BlogNew.Blog.Post
   alias BlogNew.Blog.ElixirRSS
-  alias BlogNewWeb.Router.Helpers, as: Routes
 
   @rss_item_desc_length 240
 
@@ -35,17 +34,7 @@ defmodule BlogNew.Blog.RSS do
       |> Enum.sort(&Post.sort_posts/2)
       |> Enum.map(&post_to_rss_item(&1))
 
-    feed = ElixirRSS.feed(channel, items)
-
-    # write feed to xml file
-    File.write!("priv/static/rss.xml", feed)
-
-    # legacy url from old Zola static site
-    case File.mkdir("priv/static/static") do
-      :ok -> File.write!("priv/static/static/rss.23a67eb85f.xml", feed)
-      {:error, :eexist} -> File.write!("priv/static/static/rss.23a67eb85f.xml", feed)
-      {:error, _} -> IO.puts("Failed to write rss.23a67eb85f.xml")
-    end
+    ElixirRSS.feed(channel, items)
   end
 
   defp post_to_rss_item(%Post{
@@ -60,9 +49,7 @@ defmodule BlogNew.Blog.RSS do
     publish_datetime = DateTime.new!(publish_date, ~T[00:00:00], "GMT")
     publish_date_RFC1123 = Timex.format!(publish_datetime, "{RFC1123}")
 
-    link =
-      "https://taylor.gl" <>
-        Routes.post_path(BlogNewWeb.Endpoint, :show, Post.post_id(markdown_filename))
+    link = "https://taylor.gl/post/#{Post.post_id(markdown_filename)}"
 
     # using link as the guid
     ElixirRSS.item(title, description, publish_date_RFC1123, link, link)

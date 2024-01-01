@@ -7,18 +7,20 @@ defmodule BlogNew.Blog do
   alias BlogNew.Repo
   alias BlogNew.Blog.Post
 
+  @env Application.compile_env(:blog_new, :env)
+
   @doc """
   Returns the list of posts, sorted by publish date.
   Does not return draft posts unless the current environment is the development environment (:dev).
 
   ## Examples
 
-      iex> list_posts()
+      iex> list_posts!()
       [%Post{}, ...]
 
   """
   def list_posts! do
-    if Application.get_env(:blog_new, :env) == :dev do
+    if @env == :dev do
       # crawl for new posts, and show drafts
       BlogNew.Blog.Post.crawl()
 
@@ -53,7 +55,7 @@ defmodule BlogNew.Blog do
   def get_post!(id) do
     filename = Post.post_filename(id)
 
-    if Application.get_env(:blog_new, :env) == :dev do
+    if @env == :dev do
       # crawl for new posts, and show drafts
       BlogNew.Blog.Post.crawl()
       Repo.get_by!(Post, markdown_filename: filename)

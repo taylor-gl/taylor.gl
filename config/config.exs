@@ -5,11 +5,11 @@
 # is restricted to this project.
 
 # General application configuration
-use Mix.Config
+import Config
 
 config :blog_new,
   ecto_repos: [BlogNew.Repo],
-  env: Mix.env()
+  env: config_env()
 
 # Configures the endpoint
 config :blog_new, BlogNewWeb.Endpoint,
@@ -33,4 +33,4 @@ config :elixir, :time_zone_database, Tzdata.TimeZoneDatabase
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
-import_config "#{Mix.env()}.exs"
+import_config "#{config_env()}.exs"

@@ -17,6 +17,8 @@ defmodule BlogNewWeb do
   and import those modules here.
   """
 
+  def static_paths, do: ~w(assets css fonts images js favicon.ico apple-touch-icon.png favicon-32x32.png favicon-16x16.png robots.txt pdf rss.xml static)
+
   def controller do
     quote do
       use Phoenix.Controller, namespace: BlogNewWeb
@@ -24,6 +26,8 @@ defmodule BlogNewWeb do
       import Plug.Conn
       import BlogNewWeb.Gettext
       alias BlogNewWeb.Router.Helpers, as: Routes
+
+      unquote(verified_routes())
     end
   end
 
@@ -35,7 +39,7 @@ defmodule BlogNewWeb do
 
       # Import convenience functions from controllers
       import Phoenix.Controller,
-        only: [get_flash: 1, get_flash: 2, view_module: 1, view_template: 1]
+        only: [view_module: 1, view_template: 1]
 
       # Include shared imports and aliases for views
       unquote(view_helpers())
@@ -60,8 +64,9 @@ defmodule BlogNewWeb do
 
   defp view_helpers do
     quote do
-      # Use all HTML functionality (forms, tags, etc)
-      use Phoenix.HTML
+      import Phoenix.HTML
+      import Phoenix.HTML.Form
+      use PhoenixHTMLHelpers
 
       # Import basic rendering functionality (render, render_layout, etc)
       import Phoenix.View
@@ -69,6 +74,17 @@ defmodule BlogNewWeb do
       import BlogNewWeb.ErrorHelpers
       import BlogNewWeb.Gettext
       alias BlogNewWeb.Router.Helpers, as: Routes
+
+      unquote(verified_routes())
+    end
+  end
+
+  def verified_routes do
+    quote do
+      use Phoenix.VerifiedRoutes,
+        endpoint: BlogNewWeb.Endpoint,
+        router: BlogNewWeb.Router,
+        statics: BlogNewWeb.static_paths()
     end
   end
 

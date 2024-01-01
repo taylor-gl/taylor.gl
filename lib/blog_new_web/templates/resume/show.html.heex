@@ -35,7 +35,7 @@
         </div>
       </div>
       <div class="w-1/12"></div>
-      <form class="contents" method="GET" action="<%= Routes.static_path(@conn, "/pdf/Taylor_G_Lunt_Resume.pdf") %>">
+      <form class="contents" method="GET" action={~p"/pdf/Taylor_G_Lunt_Resume.pdf"}>
         <button class="group text-center font-serif text-xl leading-relaxed text-green-700 bg-white border border-green-600 ring-green-600 ring-offset-1 rounded-xl justify-self-end flex justify-center mt-3 mx-2 w-3/12 h-2/4 shadow transition duration-200 ease-in-out hover:bg-green-600 hover:text-white hover:shadow-xl transform hover:-translate-y-2 hover:scale-105 select-none focus:outline-none focus:shadow-outline focus:ring-2 print:invisible">
           <div class="pr-2 self-center">
             <i class="fas fa-file-pdf fa-lg"></i>
@@ -87,6 +87,7 @@
             <p class="relative z-10">Renal Dialysis and Emergency Room Volunteer</p>
             <p class="relative z-10">In teams, we were in charge of tasks like assisting the patients and nurses, organizing, cleaning, and bringing meals to patients.</p>
           </div>
+        </section>
       </div>
       <div class="flex-grow w-4/12"> <!-- column 2 -->
         <section>
@@ -116,5 +117,6 @@
           </div>
         </section>
       </div>
-
+    </div>
+  </div>
 </div>

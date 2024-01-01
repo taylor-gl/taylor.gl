@@ -1,7 +1,7 @@
 
 <div class="container max-w-prose m-auto px-8 py-4">
   <nav class="pb-2">
-    <span class="link"><%= link "Home", to: Routes.home_path(@conn, :show) %></span>
+    <span class="link"><%= link "Home", to: ~p"/" %></span>
   </nav>
   <h1 class="font-sans text-4xl font-bold tracking-wider leading-relaxed pb-2">Blog</h1>
   <ul class="text list-disc">
@@ -10,7 +10,7 @@
         <%= if post.draft do %>
           <strong class="text-red-700">DRAFT</strong>
         <% end %>
-        <%= link post.title, to: Routes.post_path(@conn, :show, Post.post_id(post.markdown_filename)) %>
+        <%= link post.title, to: ~p"/blog/#{Post.post_id(post.markdown_filename)}" %>
       </li>
     <% end %>
   </ul>

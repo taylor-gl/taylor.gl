@@ -5,6 +5,8 @@ defmodule BlogNew.Writing do
   import Ecto.Query, warn: false
   alias BlogNew.{Repo, Writing}
 
+  @env Application.compile_env(:blog_new, :env)
+
   schema "writings" do
     field :markdown_filename, :string
     field :title, :string
@@ -50,7 +52,7 @@ defmodule BlogNew.Writing do
   Does not return drafts unless the current environment is the development environment (:dev).
   """
   def list_writings! do
-    if Application.get_env(:blog_new, :env) == :dev do
+    if @env == :dev do
       # crawl for new writings, and show drafts
       BlogNew.Writing.crawl()
 
@@ -76,7 +78,7 @@ defmodule BlogNew.Writing do
   def get_writing!(slug) do
     filename = Writing.writing_filename(slug)
 
-    if Application.get_env(:blog_new, :env) == :dev do
+    if @env == :dev do
       # crawl for new writings, and show drafts
       BlogNew.Writing.crawl()
       Repo.get_by!(Writing, markdown_filename: filename)
@@ -99,7 +101,6 @@ defmodule BlogNew.Writing do
   """
   def init do
     BlogNew.Writing.crawl()
-    BlogNew.Blog.RSS.gen_rss()
   end
 
   @doc """
@@ -107,32 +108,38 @@ defmodule BlogNew.Writing do
   """
   def crawl do
     high_school_poems_and_changes =
-      File.ls!("priv/content/poems/high-school")
+      Path.join(:code.priv_dir(:blog_new), "/content/poems/high-school")
+|> File.ls!()
       |> Enum.map(&Writing.writing_from_file(&1, :high_school, :poem))
       |> Enum.filter(& &1)
 
     university_poems_and_changes =
-      File.ls!("priv/content/poems/university")
+      Path.join(:code.priv_dir(:blog_new), "/content/poems/university")
+|> File.ls!()
       |> Enum.map(&Writing.writing_from_file(&1, :university, :poem))
       |> Enum.filter(& &1)
 
     recent_poems_and_changes =
-      File.ls!("priv/content/poems/recent")
+      Path.join(:code.priv_dir(:blog_new), "/content/poems/recent")
+|> File.ls!()
       |> Enum.map(&Writing.writing_from_file(&1, :recent, :poem))
       |> Enum.filter(& &1)
 
     high_school_stories_and_changes =
-      File.ls!("priv/content/stories/high-school")
+      Path.join(:code.priv_dir(:blog_new), "/content/stories/high-school")
+|> File.ls!()
       |> Enum.map(&Writing.writing_from_file(&1, :high_school, :story))
       |> Enum.filter(& &1)
 
     university_stories_and_changes =
-      File.ls!("priv/content/stories/university")
+      Path.join(:code.priv_dir(:blog_new), "/content/stories/university")
+|> File.ls!()
       |> Enum.map(&Writing.writing_from_file(&1, :university, :story))
       |> Enum.filter(& &1)
 
     recent_stories_and_changes =
-      File.ls!("priv/content/stories/recent")
+      Path.join(:code.priv_dir(:blog_new), "/content/stories/recent")
+|> File.ls!()
       |> Enum.map(&Writing.writing_from_file(&1, :recent, :story))
       |> Enum.filter(& &1)
 
@@ -157,12 +164,12 @@ defmodule BlogNew.Writing do
     Date.compare(d1, d2) == :gt
   end
 
-  defp get_writing_dir(:high_school, :poem), do: "priv/content/poems/high-school/"
-  defp get_writing_dir(:university, :poem), do: "priv/content/poems/university/"
-  defp get_writing_dir(:recent, :poem), do: "priv/content/poems/recent/"
-  defp get_writing_dir(:high_school, :story), do: "priv/content/stories/high-school/"
-  defp get_writing_dir(:university, :story), do: "priv/content/stories/university/"
-  defp get_writing_dir(:recent, :story), do: "priv/content/stories/recent/"
+  defp get_writing_dir(:high_school, :poem), do: Path.join(:code.priv_dir(:blog_new), "/content/poems/high-school/")
+  defp get_writing_dir(:university, :poem), do: Path.join(:code.priv_dir(:blog_new), "/content/poems/university/")
+  defp get_writing_dir(:recent, :poem), do: Path.join(:code.priv_dir(:blog_new), "/content/poems/recent/")
+  defp get_writing_dir(:high_school, :story), do: Path.join(:code.priv_dir(:blog_new), "/content/stories/high-school/")
+  defp get_writing_dir(:university, :story), do: Path.join(:code.priv_dir(:blog_new), "/content/stories/university/")
+  defp get_writing_dir(:recent, :story), do: Path.join(:code.priv_dir(:blog_new), "/content/stories/recent/")
 
   @doc """
   Creates a writing struct from a markdown file for the writing, or finds it in the database.

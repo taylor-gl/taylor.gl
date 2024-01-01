@@ -54,7 +54,6 @@ defmodule BlogNew.Blog.Post do
   """
   def init do
     BlogNew.Blog.Post.crawl()
-    BlogNew.Blog.RSS.gen_rss()
   end
 
   @doc """
@@ -62,7 +61,8 @@ defmodule BlogNew.Blog.Post do
   """
   def crawl do
     posts_and_changes =
-      File.ls!("priv/content/posts")
+      Path.join(:code.priv_dir(:blog_new),"/content/posts")
+      |> File.ls!()
       |> Enum.map(&Post.post_from_file/1)
       |> Enum.filter(& &1)
 
@@ -85,12 +85,12 @@ defmodule BlogNew.Blog.Post do
   @doc """
   Creates a post struct from a markdown file for the post, or finds it in the database.
 
-  Returns a the post struct and the list of changes that have been made to the post since it
+  Returns the post struct and the list of changes that have been made to the post since it
   was updated in the database.
   """
   def post_from_file(filename) do
     if String.match?(filename, ~r/^\d+.md/) do
-      full_filename = Path.join(["priv/content/posts", filename])
+      full_filename = Path.join([:code.priv_dir(:blog_new), "/content/posts", filename])
 
       modified_date =
         full_filename
