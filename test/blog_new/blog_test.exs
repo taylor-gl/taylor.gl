@@ -7,10 +7,18 @@ defmodule BlogNew.BlogTest do
   doctest Post
 
   describe "posts" do
-    @valid_attrs %{markdown_filename: "1.md", title: "some title", content: "test", plain_content: "test", draft: false, publish_date: ~D[2023-01-01]}
+    @valid_attrs %{
+      markdown_filename: "1.md",
+      title: "some title",
+      content: "test",
+      plain_content: "test",
+      draft: false,
+      publish_date: ~D[2023-01-01]
+    }
 
     def post_fixture(attrs \\ %{}) do
       attrs = Enum.into(attrs, @valid_attrs)
+
       {:ok, post} =
         Post.changeset(%Post{}, attrs)
         |> Repo.insert()

@@ -52,7 +52,8 @@ defmodule BlogNew.MixProject do
       {:yamerl, "~> 0.10"},
       {:tzdata, "~> 1.1"},
       {:timex, "~> 3.7"},
-      {:ssl_verify_fun, "~> 1.1.7"}, # To fix an error with 1.1.6
+      # To fix an error with 1.1.6
+      {:ssl_verify_fun, "~> 1.1.7"},
       {:logger_file_backend, "0.0.13"}
     ]
   end

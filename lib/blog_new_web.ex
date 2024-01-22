@@ -17,7 +17,9 @@ defmodule BlogNewWeb do
   and import those modules here.
   """
 
-  def static_paths, do: ~w(assets css fonts images js favicon.ico apple-touch-icon.png favicon-32x32.png favicon-16x16.png robots.txt pdf rss.xml static)
+  def static_paths,
+    do:
+      ~w(assets css fonts images js favicon.ico apple-touch-icon.png favicon-32x32.png favicon-16x16.png robots.txt pdf rss.xml static)
 
   def controller do
     quote do
