@@ -61,8 +61,13 @@ defmodule BlogNew.Blog.Post do
   """
   def crawl do
     posts_and_changes =
-      Path.join(:code.priv_dir(:blog_new),"/content/posts")
-      |> File.ls!()
+      Path.join(:code.priv_dir(:blog_new), "/content/posts")
+      |> then(fn filepath ->
+        case File.ls(filepath) do
+          {:ok, files} -> files
+          {:error, _} -> []
+        end
+      end)
       |> Enum.map(&Post.post_from_file/1)
       |> Enum.filter(& &1)
 

@@ -109,37 +109,67 @@ defmodule BlogNew.Writing do
   def crawl do
     high_school_poems_and_changes =
       Path.join(:code.priv_dir(:blog_new), "/content/poems/high-school")
-|> File.ls!()
+      |> then(fn filepath ->
+        case File.ls(filepath) do
+          {:ok, files} -> files
+          {:error, _} -> []
+        end
+      end)
       |> Enum.map(&Writing.writing_from_file(&1, :high_school, :poem))
       |> Enum.filter(& &1)
 
     university_poems_and_changes =
       Path.join(:code.priv_dir(:blog_new), "/content/poems/university")
-|> File.ls!()
+      |> then(fn filepath ->
+        case File.ls(filepath) do
+          {:ok, files} -> files
+          {:error, _} -> []
+        end
+      end)
       |> Enum.map(&Writing.writing_from_file(&1, :university, :poem))
       |> Enum.filter(& &1)
 
     recent_poems_and_changes =
       Path.join(:code.priv_dir(:blog_new), "/content/poems/recent")
-|> File.ls!()
+      |> then(fn filepath ->
+        case File.ls(filepath) do
+          {:ok, files} -> files
+          {:error, _} -> []
+        end
+      end)
       |> Enum.map(&Writing.writing_from_file(&1, :recent, :poem))
       |> Enum.filter(& &1)
 
     high_school_stories_and_changes =
       Path.join(:code.priv_dir(:blog_new), "/content/stories/high-school")
-|> File.ls!()
+      |> then(fn filepath ->
+        case File.ls(filepath) do
+          {:ok, files} -> files
+          {:error, _} -> []
+        end
+      end)
       |> Enum.map(&Writing.writing_from_file(&1, :high_school, :story))
       |> Enum.filter(& &1)
 
     university_stories_and_changes =
       Path.join(:code.priv_dir(:blog_new), "/content/stories/university")
-|> File.ls!()
+      |> then(fn filepath ->
+        case File.ls(filepath) do
+          {:ok, files} -> files
+          {:error, _} -> []
+        end
+      end)
       |> Enum.map(&Writing.writing_from_file(&1, :university, :story))
       |> Enum.filter(& &1)
 
     recent_stories_and_changes =
       Path.join(:code.priv_dir(:blog_new), "/content/stories/recent")
-|> File.ls!()
+      |> then(fn filepath ->
+        case File.ls(filepath) do
+          {:ok, files} -> files
+          {:error, _} -> []
+        end
+      end)
       |> Enum.map(&Writing.writing_from_file(&1, :recent, :story))
       |> Enum.filter(& &1)
 
@@ -164,12 +194,23 @@ defmodule BlogNew.Writing do
     Date.compare(d1, d2) == :gt
   end
 
-  defp get_writing_dir(:high_school, :poem), do: Path.join(:code.priv_dir(:blog_new), "/content/poems/high-school/")
-  defp get_writing_dir(:university, :poem), do: Path.join(:code.priv_dir(:blog_new), "/content/poems/university/")
-  defp get_writing_dir(:recent, :poem), do: Path.join(:code.priv_dir(:blog_new), "/content/poems/recent/")
-  defp get_writing_dir(:high_school, :story), do: Path.join(:code.priv_dir(:blog_new), "/content/stories/high-school/")
-  defp get_writing_dir(:university, :story), do: Path.join(:code.priv_dir(:blog_new), "/content/stories/university/")
-  defp get_writing_dir(:recent, :story), do: Path.join(:code.priv_dir(:blog_new), "/content/stories/recent/")
+  defp get_writing_dir(:high_school, :poem),
+    do: Path.join(:code.priv_dir(:blog_new), "/content/poems/high-school/")
+
+  defp get_writing_dir(:university, :poem),
+    do: Path.join(:code.priv_dir(:blog_new), "/content/poems/university/")
+
+  defp get_writing_dir(:recent, :poem),
+    do: Path.join(:code.priv_dir(:blog_new), "/content/poems/recent/")
+
+  defp get_writing_dir(:high_school, :story),
+    do: Path.join(:code.priv_dir(:blog_new), "/content/stories/high-school/")
+
+  defp get_writing_dir(:university, :story),
+    do: Path.join(:code.priv_dir(:blog_new), "/content/stories/university/")
+
+  defp get_writing_dir(:recent, :story),
+    do: Path.join(:code.priv_dir(:blog_new), "/content/stories/recent/")
 
   @doc """
   Creates a writing struct from a markdown file for the writing, or finds it in the database.
