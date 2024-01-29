@@ -48,7 +48,7 @@ defmodule BlogNew.MixProject do
       {:gettext, "~> 0.24"},
       {:jason, "~> 1.4"},
       {:plug_cowboy, "~> 2.6"},
-      {:earmark, "~> 1.4.15"},
+      {:earmark, "~> 1.4.46"},
       {:yamerl, "~> 0.10"},
       {:tzdata, "~> 1.1"},
       {:timex, "~> 3.7"},

@@ -13,6 +13,7 @@ defmodule BlogNew.Blog.Post do
     field :content, :string
     field :draft, :boolean
     field :publish_date, :date
+    field :starred, :boolean
 
     field :plain_content, :string
 
@@ -22,14 +23,23 @@ defmodule BlogNew.Blog.Post do
   @doc false
   def changeset(post, attrs) do
     post
-    |> cast(attrs, [:title, :markdown_filename, :content, :plain_content, :draft, :publish_date])
+    |> cast(attrs, [
+      :title,
+      :markdown_filename,
+      :content,
+      :plain_content,
+      :draft,
+      :publish_date,
+      :starred
+    ])
     |> validate_required([
       :title,
       :markdown_filename,
       :content,
       :plain_content,
       :draft,
-      :publish_date
+      :publish_date,
+      :starred
     ])
     |> unique_constraint(:markdown_filename)
   end
@@ -194,7 +204,8 @@ defmodule BlogNew.Blog.Post do
       publish_date: Date.from_iso8601!(get_prop(props, "publish_date")),
       draft: string_to_boolean(get_prop(props, "draft")),
       content: content,
-      plain_content: plain_content
+      plain_content: plain_content,
+      starred: get_prop(props, "starred")
     }
   end
 
