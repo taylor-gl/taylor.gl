@@ -58,8 +58,12 @@
 }
 
 li {
-  position: relative;
   list-style: none;
+}
+
+li:not(ul.list-none > li) {
+  position: relative;
+  padding-left: 1.5em;
 }
 
 li:not(ul.list-none > li)::before {
@@ -68,17 +72,15 @@ li:not(ul.list-none > li)::before {
   left: 0;
   top: -60%;
   font-size: 2.0em;
-  padding-left: 1.5em;
 }
 
-li.star-list::before {
+li.star-list:not(ul.list-none > li)::before {
   content: '✦';
   color: #0891b2;
   position: absolute;
   left: -0.20em;
   top: -20%;
   font-size: 1.5em;
-  padding-left: 1.5em;
 }
 
 /* ========== Global styling ========== */
