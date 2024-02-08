@@ -52,16 +52,22 @@ defmodule BlogNew.Writing do
   Does not return drafts unless the current environment is the development environment (:dev).
   """
   def list_writings! do
+    today = Date.utc_today()
+
     if @env == :dev do
       # crawl for new writings, and show drafts
       BlogNew.Writing.crawl()
 
-      Repo.all(Writing)
+      query =
+        from w in Writing,
+          where: w.publish_date <= ^today
+
+      Repo.all(query)
       |> Enum.sort(&Writing.sort_writings/2)
     else
       query =
         from w in Writing,
-          where: w.draft == false
+          where: w.draft == false and w.publish_date <= ^today
 
       Repo.all(query)
       |> Enum.sort(&Writing.sort_writings/2)
@@ -77,13 +83,17 @@ defmodule BlogNew.Writing do
   """
   def get_writing!(slug) do
     filename = Writing.writing_filename(slug)
+    today = Date.utc_today()
 
     if @env == :dev do
       # crawl for new writings, and show drafts
       BlogNew.Writing.crawl()
-      Repo.get_by!(Writing, markdown_filename: filename)
+
+      query = from w in Writing, where: w.markdown_filename == ^filename and w.publish_date <= ^today
+      Repo.one!(query)
     else
-      Repo.get_by!(Writing, markdown_filename: filename, draft: false)
+      query = from w in Writing, where: w.markdown_filename == ^filename and w.publish_date <= ^today and w.draft == false
+      Repo.one!(query)
     end
   end
 

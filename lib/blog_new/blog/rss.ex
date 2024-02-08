@@ -1,6 +1,5 @@
 defmodule BlogNew.Blog.RSS do
-  import Ecto.Query, warn: false
-  alias BlogNew.Repo
+  alias BlogNew.Blog
   alias BlogNew.Blog.Post
   alias BlogNew.Blog.ElixirRSS
   alias BlogNew.Writing
@@ -25,15 +24,8 @@ defmodule BlogNew.Blog.RSS do
         "en-us"
       )
 
-    # build RSS items from database (do not include draft posts or draft writings)
-    posts_query =
-      from p in Post,
-      where: p.draft == false
-
-    writings_query = from w in Writing, where: w.draft == false
-
-    posts = Repo.all(posts_query)
-    writings = Repo.all(writings_query)
+    posts = Blog.list_posts!()
+    writings = Writing.list_writings!()
 
     sorted_items = (posts ++ writings) |> sort_items() |> Enum.map(&to_rss_item/1)
 

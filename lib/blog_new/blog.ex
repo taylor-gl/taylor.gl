@@ -20,16 +20,22 @@ defmodule BlogNew.Blog do
 
   """
   def list_posts! do
+    today = Date.utc_today()
+
     if @env == :dev do
       # crawl for new posts, and show drafts
       BlogNew.Blog.Post.crawl()
 
-      Repo.all(Post)
+      query =
+        from p in Post,
+        where: p.publish_date <= ^today
+
+      Repo.all(query)
       |> Enum.sort(&Post.sort_posts/2)
     else
       query =
         from p in Post,
-          where: p.draft == false
+        where: p.draft == false and p.publish_date <= ^today
 
       Repo.all(query)
       |> Enum.sort(&Post.sort_posts/2)
@@ -54,13 +60,19 @@ defmodule BlogNew.Blog do
   """
   def get_post!(id) do
     filename = Post.post_filename(id)
+    today = Date.utc_today()
 
     if @env == :dev do
       # crawl for new posts, and show drafts
       BlogNew.Blog.Post.crawl()
-      Repo.get_by!(Post, markdown_filename: filename)
+
+      query = from p in Post, where: p.markdown_filename == ^filename and p.publish_date <= ^today
+
+      Repo.one!(query)
     else
-      Repo.get_by!(Post, markdown_filename: filename, draft: false)
+      query = from p in Post, where: p.markdown_filename == ^filename and p.publish_date <= ^today and p.draft == false
+
+      Repo.one!(query)
     end
   end
 end
