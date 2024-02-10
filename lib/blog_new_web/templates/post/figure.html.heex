@@ -2,7 +2,7 @@
   <figure class="flex flex-col ml-auto mr-auto max-w-full">
     <picture>
       <source srcset={~p"/images/#{@webp_src}"} type="image/webp">
-      <img class="shadow-lg m-auto max-w-full" src={~p"/images/#{@jpg_src}"} alt={@alt}>
+      <img class={if @is_australian, do: "markdown-img flip", else: "markdown-img"} src={~p"/images/#{@jpg_src}"} alt={@alt}>
     </picture>
     <figcaption class="font-serif text-lg leading-relaxed text-center text-gray-800"><%= @caption %></figcaption>
   </figure>

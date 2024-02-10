@@ -83,6 +83,10 @@ li.star-list:not(ul.list-none > li):not(.markdown-li)::before {
   font-size: 1.5em;
 }
 
+.flip {
+  @apply rotate-180
+}
+
 /* ========== Global styling ========== */
 body {
   @apply bg-gray-50;
@@ -139,7 +143,9 @@ body {
 
 .markdown-a { @apply link; }
 
-.markdown-img { }
+.markdown-img {
+  @apply shadow-lg m-auto max-w-full rounded-2xl
+}
 .markdown-figure { }
 .markdown-figcaption { }
 

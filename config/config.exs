@@ -31,6 +31,15 @@ config :phoenix, :json_library, Jason
 # Configure timezone database for timezone-based DateTime commands
 config :elixir, :time_zone_database, Tzdata.TimeZoneDatabase
 
+# Using GeoLite2-Country database from MaxMind
+config :geolix, databases: [
+  %{
+    id: :geolite2_country,
+    adapter: Geolix.Adapter.MMDB2,
+    source: "/var/lib/blog_new/geoip/GeoLite2-Country.mmdb"
+  }
+]
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{config_env()}.exs"

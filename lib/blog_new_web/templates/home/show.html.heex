@@ -1,7 +1,7 @@
 <div class="cyan-stripe-bg overflow-auto h-screen">
   <div class="container max-w-md sm:max-w-2xl mx-auto my-16 bg-gray-50 shadow-2xl rounded-lg sm:rounded-l-full flex flex-col sm:flex-row items-center transition duration-200 ease-in-out transform hover:scale-105 hover:shadow-3xl">
     <div class="rounded-full m-3 shadow">
-      <img src={~p"/images/Taylor_Lunt_face.jpg"} alt="Taylor Lunt's face" class="h-48 w-48 rounded-full filter grayscale" />
+      <img src={~p"/images/Taylor_Lunt_face.jpg"} alt="Taylor Lunt's face" class={if @is_australian, do: "flip h-48 w-48 rounded-full grayscale hover:grayscale-0", else: "h-48 w-48 rounded-full grayscale hover:grayscale-0"} />
     </div>
     <div class="px-4">
       <h1 class="py-2 font-sans text-5xl font-bold tracking-wider leading-tight">Taylor G. Lunt</h1>

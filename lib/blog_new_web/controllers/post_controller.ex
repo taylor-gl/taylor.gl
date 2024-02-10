@@ -9,13 +9,15 @@ defmodule BlogNewWeb.PostController do
   end
 
   def show(conn, %{"id" => id}) do
+    is_australian = BlogNew.Geolocation.is_user_from_australia?(conn.remote_ip)
+
     post = Blog.get_post!(id)
 
     publish_date =
       post.publish_date
       |> Calendar.strftime("%d %B %Y")
 
-    render(conn, "show.html", post: post, publish_date: publish_date)
+    render(conn, "show.html", post: post, publish_date: publish_date, is_australian: is_australian)
   end
 
   def phpmyadmin(conn, _params) do

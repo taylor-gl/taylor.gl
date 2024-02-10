@@ -7,7 +7,7 @@
   <article>
     <h1 class="markdown-h1"><%= @post.title %></h1>
     <!-- evaluate EEx tags in content and then render the content -->
-    <%= raw(EEx.eval_string(@post.content)) %>
+    <%= raw(EEx.eval_string(@post.content, [is_australian: @is_australian])) %>
     <div class="pt-4 pb-2 font-sans font-light text-sm text-center text-gray-500">
       <strong>Published <%= @publish_date %></strong>
     </div>

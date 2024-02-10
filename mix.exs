@@ -25,7 +25,7 @@ defmodule BlogNew.MixProject do
   def application do
     [
       mod: {BlogNew.Application, []},
-      extra_applications: [:logger, :runtime_tools, :yamerl]
+      extra_applications: [:geolix, :logger, :runtime_tools, :yamerl]
     ]
   end
 
@@ -54,7 +54,9 @@ defmodule BlogNew.MixProject do
       {:timex, "~> 3.7"},
       # To fix an error with 1.1.6
       {:ssl_verify_fun, "~> 1.1.7"},
-      {:logger_file_backend, "0.0.13"}
+      {:logger_file_backend, "0.0.13"},
+      {:geolix, "~> 2.0"},
+      {:geolix_adapter_mmdb2, "~> 0.6.0"},
     ]
   end
 

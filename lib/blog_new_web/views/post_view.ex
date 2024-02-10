@@ -2,7 +2,7 @@ defmodule BlogNewWeb.PostView do
   use BlogNewWeb, :view
   alias BlogNew.Blog.Post
 
-  def figure(filename, alt_text, caption_text) do
+  def figure(is_australian, filename, alt_text, caption_text) do
     webp_filename = filename <> ".webp"
     jpg_filename = filename <> ".jpg"
 
@@ -11,6 +11,7 @@ defmodule BlogNewWeb.PostView do
       "figure.html",
       alt: alt_text,
       caption: caption_text,
+      is_australian: is_australian,
       webp_src: webp_filename,
       jpg_src: jpg_filename
     )
