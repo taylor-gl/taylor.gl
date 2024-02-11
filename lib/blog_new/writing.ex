@@ -89,10 +89,16 @@ defmodule BlogNew.Writing do
       # crawl for new writings, and show drafts
       BlogNew.Writing.crawl()
 
-      query = from w in Writing, where: w.markdown_filename == ^filename and w.publish_date <= ^today
+      query =
+        from w in Writing, where: w.markdown_filename == ^filename and w.publish_date <= ^today
+
       Repo.one!(query)
     else
-      query = from w in Writing, where: w.markdown_filename == ^filename and w.publish_date <= ^today and w.draft == false
+      query =
+        from w in Writing,
+          where:
+            w.markdown_filename == ^filename and w.publish_date <= ^today and w.draft == false
+
       Repo.one!(query)
     end
   end

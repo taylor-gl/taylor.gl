@@ -35,24 +35,24 @@
 .footnote-text:hover { text-decoration-color: var(--text) }
 .footnote-text:active { text-decoration-color: var(--text) }
 
-// from Hero Patterns
+/* from Hero Patterns */
 .green-stripe-bg {
   background-color: #65a30d;
-  // the light part of the stripe, imparted by the SVG image, is 75ad27
+  /* the light part of the stripe, imparted by the SVG image, is 75ad27 */
   background-image: url("/images/green-stripe.svg");
-  // background-attachment: fixed;
+  /* background-attachment: fixed; */
 }
 
-// from Hero Patterns
+/* from Hero Patterns */
 .cyan-stripe-bg {
   background-color: #0891b2;
-  // the light part of the stripe, imparted by the SVG image, is #279fbc
+  /* the light part of the stripe, imparted by the SVG image, is #279fbc */
   background-image: url("/images/blue-stripe.svg");
   background-attachment: fixed;
 }
 
 .letter-paper {
-  // US letter paper sized element
+  /* US letter paper sized element (for resume) */
   width: 21.59cm;
   height: 27.94cm;
 }
@@ -102,14 +102,9 @@ body {
 
 .markdown-strong { }
 
-// .markdown-h1 { @apply font-sans text-5xl font-normal tracking-wider leading-relaxed text-center text-gray-900 uppercase pb-2; }
+/* .markdown-h1 { @apply font-sans text-5xl font-normal tracking-wider leading-relaxed text-center text-gray-900 uppercase pb-2; } */
 .markdown-h1 {
   @apply font-sans text-4xl font-bold tracking-wider leading-relaxed text-center uppercase pb-2;
-  // background-color: #65a30d;
-  // background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.11' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
-  // background-clip: text;
-  // color: transparent;
-  // --webkit-background-clip: text;
 }
 .markdown-h2 { @apply font-sans text-2xl font-medium leading-relaxed text-left text-gray-900 pt-4 pb-1; }
 .markdown-h3 { @apply font-sans text-xl leading-relaxed text-left text-gray-900 pt-3; }
@@ -117,12 +112,12 @@ body {
 .markdown-h5 { @apply font-sans text-lg leading-relaxed text-left text-gray-900 pt-1; }
 .markdown-h6 { @apply font-sans text-lg leading-relaxed text-left text-gray-900 pt-1; }
 
-// subtly striped border to the left of blockquotes
+/* subtly striped border to the left of blockquotes */
 .markdown-blockquote .markdown-p::before {
   content: "";
   position: absolute;
   background-color: #0891b2;
-  // the light part of the stripe, imparted by the SVG image, is #279fbc
+  /* the light part of the stripe, imparted by the SVG image, is #279fbc */
   background-image: url("/images/blue-stripe.svg");
   width: 2px;
   height: 90%;
@@ -149,16 +144,18 @@ body {
 .markdown-figure { }
 .markdown-figcaption { }
 
-// .markdown-small { }
-// .markdown-sub { }
-// .markdown-sup { }
+/*
+ .markdown-small { }
+ .markdown-sub { }
+ .markdown-sup { }
 
-// .markdown-ins { }
-// .markdown-del { }
+ .markdown-ins { }
+ .markdown-del { }
 
-// .markdown-pre { }
-// .markdown-code { }
-// .markdown-kbd { }
+ .markdown-pre { }
+ .markdown-code { }
+ .markdown-kbd { }
+*/
 
 h1 .markdown-header-anchor,
 h2 .markdown-header-anchor,

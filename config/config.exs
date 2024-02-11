@@ -32,13 +32,35 @@ config :phoenix, :json_library, Jason
 config :elixir, :time_zone_database, Tzdata.TimeZoneDatabase
 
 # Using GeoLite2-Country database from MaxMind
-config :geolix, databases: [
-  %{
-    id: :geolite2_country,
-    adapter: Geolix.Adapter.MMDB2,
-    source: "/var/lib/blog_new/geoip/GeoLite2-Country.mmdb"
-  }
-]
+config :geolix,
+  databases: [
+    %{
+      id: :geolite2_country,
+      adapter: Geolix.Adapter.MMDB2,
+      source: "/var/lib/blog_new/geoip/GeoLite2-Country.mmdb"
+    }
+  ]
+
+config :esbuild,
+  version: "0.18.6",
+  default: [
+    args:
+      ~w(js/app.js --bundle --target=es2017 --outdir=../priv/static/assets --external:/fonts/* --external:/images/*),
+    cd: Path.expand("../assets", __DIR__),
+    env: %{"NODE_PATH" => Path.expand("../deps", __DIR__)}
+  ]
+
+# Configure tailwind (the version is required)
+config :tailwind,
+  version: "3.2.7",
+  default: [
+    args: ~w(
+      --config=tailwind.config.js
+      --input=css/app.css
+      --output=../priv/static/assets/app.css
+    ),
+    cd: Path.expand("../assets", __DIR__)
+  ]
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

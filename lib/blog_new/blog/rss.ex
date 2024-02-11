@@ -51,11 +51,11 @@ defmodule BlogNew.Blog.RSS do
   end
 
   defp to_rss_item(%Writing{
-        plain_content: plain_content,
-        title: title,
-        publish_date: publish_date,
-        markdown_filename: markdown_filename
-                   }) do
+         plain_content: plain_content,
+         title: title,
+         publish_date: publish_date,
+         markdown_filename: markdown_filename
+       }) do
     # to form an RSS description, remove HTML tags from content, and then truncate to appropriate length
     # using regex to remove HTML tags from RSS is imperfect, but I think it will be fine in this case
     description = String.slice(plain_content, 0, @rss_item_desc_length - 3) <> "..."

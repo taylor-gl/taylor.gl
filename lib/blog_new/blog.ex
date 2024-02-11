@@ -28,14 +28,14 @@ defmodule BlogNew.Blog do
 
       query =
         from p in Post,
-        where: p.publish_date <= ^today
+          where: p.publish_date <= ^today
 
       Repo.all(query)
       |> Enum.sort(&Post.sort_posts/2)
     else
       query =
         from p in Post,
-        where: p.draft == false and p.publish_date <= ^today
+          where: p.draft == false and p.publish_date <= ^today
 
       Repo.all(query)
       |> Enum.sort(&Post.sort_posts/2)
@@ -70,7 +70,10 @@ defmodule BlogNew.Blog do
 
       Repo.one!(query)
     else
-      query = from p in Post, where: p.markdown_filename == ^filename and p.publish_date <= ^today and p.draft == false
+      query =
+        from p in Post,
+          where:
+            p.markdown_filename == ^filename and p.publish_date <= ^today and p.draft == false
 
       Repo.one!(query)
     end

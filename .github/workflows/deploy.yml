@@ -63,10 +63,7 @@ jobs:
             MIX_ENV=prod mix ecto.create
             MIX_ENV=prod mix ecto.migrate
 
-            cd assets
-            npm install
-            npm run deploy
-            cd ..
-            MIX_ENV=prod mix phx.digest
+            MIX_ENV=prod mix assets.setup
+            MIX_ENV=prod mix assets.deploy
             MIX_ENV=prod mix release --overwrite
             systemctl start blog_new.service
