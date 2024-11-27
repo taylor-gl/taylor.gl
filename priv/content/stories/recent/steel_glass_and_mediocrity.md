@@ -32,7 +32,7 @@ I looked out my floor-to-ceiling window at the "view" of the sad, grey city belo
 
 ***
 
-This short story was written for the [[https://www.startwriting.ca|Start Writing]] Writers Boot Camp in Toronto in 2023. We were given a prompt, and had anywhere from 10 to 30 minutes to write anything we wanted based on the prompt.
+This short story was written for the [Start Writing](https://www.startwriting.ca) Writers Boot Camp in Toronto in 2023. We were given a prompt, and had anywhere from 10 to 30 minutes to write anything we wanted based on the prompt.
 
 In this case, there were two prompts, and we could choose either or both:
 1. A romantic, candlelit dinner would be incomplete without X.
