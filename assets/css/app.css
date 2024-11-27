@@ -87,6 +87,19 @@ li.star-list:not(ul.list-none > li):not(.markdown-li)::before {
   @apply rotate-180
 }
 
+/* TailwindCSS doesn't have text-orientation classes yet */
+.text-orientation-upright {
+  text-orientation: upright;
+}
+
+/* TailwindCSS doesn't have writing-mode classes yet */
+.writing-horizontal-tb {
+  writing-mode: horizontal-tb;
+}
+.writing-vertical-lr {
+  writing-mode: vertical-lr;
+}
+
 /* ========== Global styling ========== */
 body {
   @apply bg-gray-50;

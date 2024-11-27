@@ -1,6 +1,3 @@
-[submodule "priv/content"]
-	path = priv/content
-	url = git@taylor-gl-content:taylor-gl/content.git
 [submodule "priv/secret"]
 	path = priv/secret
 	url = git@taylor-gl-secret:taylor-gl/secret.git
