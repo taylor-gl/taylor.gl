@@ -15,17 +15,9 @@ jobs:
       - name: Prepare to checkout submodules
         run: |
           mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_CONTENT_DEPLOY_KEY }}" > ~/.ssh/taylor.gl.content.deploy
           echo "${{ secrets.SSH_SECRET_DEPLOY_KEY }}" > ~/.ssh/taylor.gl.secret.deploy
-          chmod 600 ~/.ssh/taylor.gl.content.deploy
           chmod 600 ~/.ssh/taylor.gl.secret.deploy
           cat << EOF > ~/.ssh/config
-          # Submodule content
-          Host taylor-gl-content
-              HostName github.com
-              User git
-              IdentityFile ~/.ssh/taylor.gl.content.deploy
-
           # Submodule secret
           Host taylor-gl-secret
               HostName github.com
